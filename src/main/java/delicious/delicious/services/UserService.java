@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import delicious.delicious.entities.UserEntity;
 import delicious.delicious.exceptions.UserException;
+import delicious.delicious.mappers.UserMapper;
 import delicious.delicious.models.UserModel;
 import delicious.delicious.repositories.UserRepo;
 
@@ -22,7 +23,9 @@ public class UserService {
     
     @Autowired
     UserRepo userRepo;
-
+    
+    @Autowired
+    UserMapper userMapper;
   
     public UserModel registerUser(UserModel user) throws UserException 
     {
@@ -30,7 +33,8 @@ public class UserService {
         {
             if(userRepo.findByEmail(user.getEmail()).isEmpty())
             {
-                UserEntity entity = userRepo.save(UserModelToUserEntity(user));
+  
+                UserEntity entity = userRepo.save(userMapper.UserModelToUserEntity(user));
                 return user.id(entity.getId());
             }else{
                 throw new UserException("this email is already exist");
@@ -51,7 +55,7 @@ public class UserService {
         }else{
             if(entity.get().getPassword().equals(user.getPassword()))
             {
-                return userEntityToUserModel(entity.get());
+                return userMapper.UserEntityToUserModel(entity.get());
             }else{
                 throw new UserException("wrong password");
             }
@@ -65,7 +69,9 @@ public class UserService {
         UserEntity entity = userRepo.findById(user.getId()).orElseThrow(()-> new UserException("no user with this id"));
         entity.userName(user.getUserName()).password(user.getPassword()).email(user.getEmail());
         userRepo.save(entity);
-        return userEntityToUserModel(entity);
+        return userMapper.UserEntityToUserModel(entity);
     }
+
+
 
 }

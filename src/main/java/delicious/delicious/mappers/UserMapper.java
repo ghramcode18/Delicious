@@ -2,8 +2,9 @@ package delicious.delicious.mappers;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.Mapping;
-
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 import delicious.delicious.entities.UserEntity;
 import delicious.delicious.models.UserModel;
 
