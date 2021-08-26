@@ -2,17 +2,23 @@ package delicious.delicious.entities;
 
 import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@Data
+@EqualsAndHashCode(exclude = "Recipes")
+
 @Entity
-@Table(name = "UserName")
+@Table(name = "UserEntity")
 public class UserEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -24,14 +30,21 @@ public class UserEntity{
     @Column(nullable = false)
     private String email;
 
+  
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_Recipe",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "Recipe_id", referencedColumnName = "id"))
+    private List  <RecipeEntity>recipe_favoriteEntity;
+
     @Column(nullable = false)
     private String password ;
     
-
-    @ManyToMany(mappedBy = "user")
-    private List  <RecipeEntity>recipe_favoriteEntity;
-    
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_Recipe",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "Recipe_id", referencedColumnName = "id"))
     private List  <RecipeEntity>recipes_clicksEntity;
 
     @OneToMany(mappedBy = "user")

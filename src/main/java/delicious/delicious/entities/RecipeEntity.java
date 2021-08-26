@@ -5,20 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity
@@ -41,19 +34,23 @@ public class RecipeEntity {
     @Column(nullable = true)
     private String type ;
 
-    @Column(nullable = true)
-    private String steps ;
+    @OneToOne
+    private Recipe_stepsEntity steps ;
 
     @Column(nullable = true)
     private String imgrate;
 
-    @ManyToMany 
-    private boolean favaorite
-    ;
-    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "users_in_board", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
-        @JoinColumn(name = "board_id") })
-    List<FavaoriteEntity> favaoriteEntities;
-
+    @ManyToMany (mappedBy = "RecipeEntity")
+    private List <UserEntity>user_favorite;
    
+    @ManyToMany (mappedBy = "RecipeEntity")
+    private List <UserEntity>user_clike;
+
+  //  (mappedBy = "id_recipeSteps_id")
+     @OneToOne
+     private Recipe_stepsEntity recipe_steps;
+
+    
+
+
 }
