@@ -19,11 +19,9 @@ import javax.persistence.Table;
 
 
 
-@Data
-@EqualsAndHashCode(exclude = "Recipes")
 
 @Entity
-@Table(name = "UserEntity")
+@Table(name = "User")
 public class UserEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -38,8 +36,8 @@ public class UserEntity{
   
     
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_Recipe",
-        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    @JoinTable(name = "User_Recipe",
+        joinColumns = @JoinColumn(name = "User_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "Recipe_id", referencedColumnName = "id"))
     private List  <RecipeEntity>recipe_favoriteEntity;
 
@@ -47,12 +45,12 @@ public class UserEntity{
     private String password ;
     
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_Recipe",
-        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    @JoinTable(name = "User_Recipe",
+        joinColumns = @JoinColumn(name = "User_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "Recipe_id", referencedColumnName = "id"))
     private List  <RecipeEntity>recipes_clicksEntity;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "mUser")
     private List<FireBaseEntity> firebase;
 
     public UserEntity() {

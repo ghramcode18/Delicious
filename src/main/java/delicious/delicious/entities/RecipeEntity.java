@@ -1,6 +1,7 @@
 package delicious.delicious.entities;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "RecipeEntity")
+@Table(name = "Recipe")
 public class RecipeEntity {
     
     @Id
@@ -40,10 +41,10 @@ public class RecipeEntity {
     @Column(nullable = true)
     private String imgrate;
 
-    @ManyToMany (mappedBy = "RecipeEntity")
+    @ManyToMany (mappedBy = "Recipe")
     private List <UserEntity>user_favorite;
    
-    @ManyToMany (mappedBy = "RecipeEntity")
+    @ManyToMany (mappedBy = "Recipe")
     private List <UserEntity>user_clike;
 
   //  (mappedBy = "id_recipeSteps_id")
