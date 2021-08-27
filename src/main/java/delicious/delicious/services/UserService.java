@@ -1,20 +1,14 @@
 // package delicious.delicious.services;
 
     
-// import java.util.ArrayList;
-// import java.util.Collection;
-// import java.util.List;
+
 // import java.util.Optional;
 // import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.data.domain.Page;
-// import org.springframework.data.domain.PageRequest;
-// import org.springframework.data.domain.Pageable;
-// import org.springframework.data.domain.Sort;
+
 // import org.springframework.stereotype.Service;
 
 // import delicious.delicious.entities.UserEntity;
 // import delicious.delicious.exceptions.UserException;
-// import delicious.delicious.mappers.UserMapper;
 // import delicious.delicious.models.UserModel;
 // import delicious.delicious.repositories.UserRepo;
 
@@ -24,8 +18,7 @@
 //     @Autowired
 //     UserRepo userRepo;
     
-//     @Autowired
-//     UserMapper userMapper;
+  
   
 //     public UserModel registerUser(UserModel user) throws UserException 
 //     {
@@ -33,7 +26,7 @@
 //         {
 //             if(userRepo.findByEmail(user.getEmail()).isEmpty())
 //             {
-//                 UserEntity entity = userRepo.save(userMapper.UserModelToUserEntity(user));
+//                 UserEntity entity = userRepo.save(UserModelToUserEntity(user));
 //                 return user.id(entity.getId());
 //             }else{
 //                 throw new UserException("this email is already exist");
@@ -43,13 +36,8 @@
 //         }
 //     }
 
-//     public  UserModel logOut(UserModel user)
-//     {
-     
-//     if (user.getEmail()!= null && user.getPassword()!=null&&user.get) {
-        
-//     }
-//     }
+  
+    
 //     public UserModel signIn(UserModel user) throws UserException
 //     {
 //         Optional<UserEntity> entity;
@@ -59,7 +47,7 @@
 //         }else{
 //             if(entity.get().getPassword().equals(user.getPassword()))
 //             {
-//                 return userMapper.UserEntityToUserModel(entity.get());
+//                 return UserEntityToUserModel(entity.get());
 //             }else{
 //                 throw new UserException("wrong password");
 //             }
@@ -67,13 +55,53 @@
 //         }
 //     }
     
+//     public  UserModel  UserEntityToUserModel(UserEntity user)
+//     {
+//         UserModel model = new UserModel()
+//         .email(user.getEmail())
+//         .userName(user.getUserName())
+//         .id(user.getId())
+//         .password(user.getPassword());
+
+//         return model;
+
+
+//     }
+
+//     public  UserEntity  UserModelToUserEntity(UserModel user)
+//     {
+//         UserEntity entity = new UserEntity()
+//         .email(user.getEmail())
+//         .userName(user.getUserName())
+//         .id(user.getId())
+//         .password(user.getPassword());
+
+//         return entity;
+
+
+//     }
+
+
+//     public  UserEntity logout (UserModel userModel)
+//     {
+//         UserEntity entity;
+//         if(userModel.getId()!= null)
+//         entity = userRepo.findById(userModel.getId()).orElseThrow(()-> new UserException("no user with this id"));
+//         entity = new UserEntity();
+//         userRepo.save(entity);
+//         return entity;
+
+
+        
+//     }
+
 //     // public UserModel updateUser(UserModel user){
 //     //     if(user.getId() == null)
 //     //         throw new UserException("can't update user without id");
 //     //     UserEntity entity = userRepo.findById(user.getId()).orElseThrow(()-> new UserException("no user with this id"));
 //     //     entity.userName(user.getUserName()).password(user.getPassword()).email(user.getEmail());
 //     //     userRepo.save(entity);
-//     //     return userMapper.UserEntityToUserModel(entity);
+//     //     return userMapper.UserEntityToUserModel(entity); 
 //     // }
 
 

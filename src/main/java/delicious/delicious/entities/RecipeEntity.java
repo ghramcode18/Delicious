@@ -41,10 +41,10 @@ public class RecipeEntity {
     @Column(nullable = true)
     private String imgrate;
 
-    @ManyToMany (mappedBy = "Recipe")
+    @ManyToMany(targetEntity = UserEntity.class, mappedBy = "Recipe", cascade = CascadeType.ALL)
     private List <UserEntity>user_favorite;
    
-    @ManyToMany (mappedBy = "Recipe")
+    @ManyToMany(targetEntity = UserEntity.class, mappedBy = "Recipe", cascade = CascadeType.ALL)
     private List <UserEntity>user_clike;
 
   //  (mappedBy = "id_recipeSteps_id")

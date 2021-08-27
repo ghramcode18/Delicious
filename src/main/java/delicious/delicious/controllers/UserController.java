@@ -36,4 +36,16 @@
 //         }                                                                                                                                                                       
 //     }
     
+//     @RequestMapping(value = "/logout", method = RequestMethod.POST)
+//     public Object logout (@RequestBody UserModel user)
+//     {try {
+        
+//         return userService.logout(user);
+
+//     } catch (UserException e) {
+//        return e.getMessage();
+
+//     }}
+
+
 // }
