@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,21 +40,21 @@ public class RecipeEntity {
     @Column(nullable = true)
     private String imgrate;
 
-    @ManyToMany(targetEntity = UserEntity.class, mappedBy = "Recipe", cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = UserEntity.class)
+    
     private List <UserEntity>user_favorite;
    
-    @ManyToMany(targetEntity = UserEntity.class, mappedBy = "Recipe", cascade = CascadeType.ALL)
-    private List <UserEntity>user_clike;
+    // @ManyToMany( mappedBy = "recipes_clicks")
+    // private List <UserEntity>user_clicks;
 
   //  (mappedBy = "id_recipeSteps_id")
      @OneToOne
      private Recipe_stepsEntity recipe_steps;
 
-
     public RecipeEntity() {
     }
 
-    public RecipeEntity(Integer id, String name, String image, double price, String type, Recipe_stepsEntity steps, String imgrate, List<UserEntity> user_favorite, List<UserEntity> user_clike, Recipe_stepsEntity recipe_steps) {
+    public RecipeEntity(Integer id, String name, String image, double price, String type, Recipe_stepsEntity steps, String imgrate, List<UserEntity> user_favorite, Recipe_stepsEntity recipe_steps) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -64,7 +63,6 @@ public class RecipeEntity {
         this.steps = steps;
         this.imgrate = imgrate;
         this.user_favorite = user_favorite;
-        this.user_clike = user_clike;
         this.recipe_steps = recipe_steps;
     }
 
@@ -132,14 +130,6 @@ public class RecipeEntity {
         this.user_favorite = user_favorite;
     }
 
-    public List<UserEntity> getUser_clike() {
-        return this.user_clike;
-    }
-
-    public void setUser_clike(List<UserEntity> user_clike) {
-        this.user_clike = user_clike;
-    }
-
     public Recipe_stepsEntity getRecipe_steps() {
         return this.recipe_steps;
     }
@@ -188,11 +178,6 @@ public class RecipeEntity {
         return this;
     }
 
-    public RecipeEntity user_clike(List<UserEntity> user_clike) {
-        setUser_clike(user_clike);
-        return this;
-    }
-
     public RecipeEntity recipe_steps(Recipe_stepsEntity recipe_steps) {
         setRecipe_steps(recipe_steps);
         return this;
@@ -206,12 +191,12 @@ public class RecipeEntity {
             return false;
         }
         RecipeEntity recipeEntity = (RecipeEntity) o;
-        return Objects.equals(id, recipeEntity.id) && Objects.equals(name, recipeEntity.name) && Objects.equals(image, recipeEntity.image) && price == recipeEntity.price && Objects.equals(type, recipeEntity.type) && Objects.equals(steps, recipeEntity.steps) && Objects.equals(imgrate, recipeEntity.imgrate) && Objects.equals(user_favorite, recipeEntity.user_favorite) && Objects.equals(user_clike, recipeEntity.user_clike) && Objects.equals(recipe_steps, recipeEntity.recipe_steps);
+        return Objects.equals(id, recipeEntity.id) && Objects.equals(name, recipeEntity.name) && Objects.equals(image, recipeEntity.image) && price == recipeEntity.price && Objects.equals(type, recipeEntity.type) && Objects.equals(steps, recipeEntity.steps) && Objects.equals(imgrate, recipeEntity.imgrate) && Objects.equals(user_favorite, recipeEntity.user_favorite) && Objects.equals(recipe_steps, recipeEntity.recipe_steps);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, image, price, type, steps, imgrate, user_favorite, user_clike, recipe_steps);
+        return Objects.hash(id, name, image, price, type, steps, imgrate, user_favorite, recipe_steps);
     }
 
     @Override
@@ -225,11 +210,10 @@ public class RecipeEntity {
             ", steps='" + getSteps() + "'" +
             ", imgrate='" + getImgrate() + "'" +
             ", user_favorite='" + getUser_favorite() + "'" +
-            ", user_clike='" + getUser_clike() + "'" +
             ", recipe_steps='" + getRecipe_steps() + "'" +
             "}";
     }
-    
+
 
 
 }

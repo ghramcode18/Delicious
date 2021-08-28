@@ -9,12 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 
@@ -35,28 +33,30 @@ public class UserEntity{
 
   
     
-    @ManyToMany(targetEntity = RecipeEntity.class,cascade = CascadeType.ALL )
-    private List  <RecipeEntity>recipe_favoriteEntity;
+    @ManyToMany(targetEntity = RecipeEntity.class)
+    @JoinTable(name = "user_favorites", joinColumns = {@JoinColumn(name = "user_id")},inverseJoinColumns = {@JoinColumn(name = "recipe_id")})
+    private List  <RecipeEntity>recipe_favorite;
 
     @Column(nullable = false)
     private String password ;
     
-    @ManyToMany(targetEntity = RecipeEntity.class,cascade = CascadeType.ALL )
-    private List  <RecipeEntity>recipes_clicksEntity;
+    // @ManyToMany(mappedBy = "user_clicks")
+    
+    // private List  <RecipeEntity>recipes_clicks;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(targetEntity = FireBaseEntity.class,mappedBy = "user")
+    
     private List<FireBaseEntity> firebase;
 
     public UserEntity() {
     }
 
-    public UserEntity(Integer id, String userName, String email, String password, List<RecipeEntity> recipe_favoriteEntity, List<RecipeEntity> recipes_clicksEntity, List<FireBaseEntity> firebase) {
+    public UserEntity(Integer id, String userName, String email, List<RecipeEntity> recipe_favorite, String password, List<FireBaseEntity> firebase) {
         this.id = id;
         this.userName = userName;
         this.email = email;
+        this.recipe_favorite = recipe_favorite;
         this.password = password;
-        this.recipe_favoriteEntity = recipe_favoriteEntity;
-        this.recipes_clicksEntity = recipes_clicksEntity;
         this.firebase = firebase;
     }
 
@@ -84,28 +84,20 @@ public class UserEntity{
         this.email = email;
     }
 
+    public List<RecipeEntity> getRecipe_favorite() {
+        return this.recipe_favorite;
+    }
+
+    public void setRecipe_favorite(List<RecipeEntity> recipe_favorite) {
+        this.recipe_favorite = recipe_favorite;
+    }
+
     public String getPassword() {
         return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<RecipeEntity> getRecipe_favoriteEntity() {
-        return this.recipe_favoriteEntity;
-    }
-
-    public void setRecipe_favoriteEntity(List<RecipeEntity> recipe_favoriteEntity) {
-        this.recipe_favoriteEntity = recipe_favoriteEntity;
-    }
-
-    public List<RecipeEntity> getRecipes_clicksEntity() {
-        return this.recipes_clicksEntity;
-    }
-
-    public void setRecipes_clicksEntity(List<RecipeEntity> recipes_clicksEntity) {
-        this.recipes_clicksEntity = recipes_clicksEntity;
     }
 
     public List<FireBaseEntity> getFirebase() {
@@ -131,18 +123,13 @@ public class UserEntity{
         return this;
     }
 
+    public UserEntity recipe_favorite(List<RecipeEntity> recipe_favorite) {
+        setRecipe_favorite(recipe_favorite);
+        return this;
+    }
+
     public UserEntity password(String password) {
         setPassword(password);
-        return this;
-    }
-
-    public UserEntity recipe_favoriteEntity(List<RecipeEntity> recipe_favoriteEntity) {
-        setRecipe_favoriteEntity(recipe_favoriteEntity);
-        return this;
-    }
-
-    public UserEntity recipes_clicksEntity(List<RecipeEntity> recipes_clicksEntity) {
-        setRecipes_clicksEntity(recipes_clicksEntity);
         return this;
     }
 
@@ -159,12 +146,12 @@ public class UserEntity{
             return false;
         }
         UserEntity userEntity = (UserEntity) o;
-        return Objects.equals(id, userEntity.id) && Objects.equals(userName, userEntity.userName) && Objects.equals(email, userEntity.email) && Objects.equals(password, userEntity.password) && Objects.equals(recipe_favoriteEntity, userEntity.recipe_favoriteEntity) && Objects.equals(recipes_clicksEntity, userEntity.recipes_clicksEntity) && Objects.equals(firebase, userEntity.firebase);
+        return Objects.equals(id, userEntity.id) && Objects.equals(userName, userEntity.userName) && Objects.equals(email, userEntity.email) && Objects.equals(recipe_favorite, userEntity.recipe_favorite) && Objects.equals(password, userEntity.password) && Objects.equals(firebase, userEntity.firebase);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, email, password, recipe_favoriteEntity, recipes_clicksEntity, firebase);
+        return Objects.hash(id, userName, email, recipe_favorite, password, firebase);
     }
 
     @Override
@@ -173,12 +160,10 @@ public class UserEntity{
             " id='" + getId() + "'" +
             ", userName='" + getUserName() + "'" +
             ", email='" + getEmail() + "'" +
+            ", recipe_favorite='" + getRecipe_favorite() + "'" +
             ", password='" + getPassword() + "'" +
-            ", recipe_favoriteEntity='" + getRecipe_favoriteEntity() + "'" +
-            ", recipes_clicksEntity='" + getRecipes_clicksEntity() + "'" +
             ", firebase='" + getFirebase() + "'" +
             "}";
     }
-
 
 }

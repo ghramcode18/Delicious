@@ -17,7 +17,7 @@ public class FireBaseEntity {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
-    @ManyToOne(optional=true)
+    @ManyToOne(optional=true,targetEntity = UserEntity.class)
     private UserEntity user;
 
     @Column(nullable = false)
