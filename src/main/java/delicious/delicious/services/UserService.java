@@ -2,14 +2,19 @@ package delicious.delicious.services;
 
     
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import delicious.delicious.entities.RecipeEntity;
 import delicious.delicious.entities.UserEntity;
+import delicious.delicious.exceptions.RecipeException;
 import delicious.delicious.exceptions.UserException;
+import delicious.delicious.models.RecipeModel;
 import delicious.delicious.models.UserModel;
+import delicious.delicious.repositories.RecipeRepo;
 import delicious.delicious.repositories.UserRepo;
 
 @Service
@@ -17,12 +22,15 @@ public class UserService {
     
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    RecipeRepo recipeRepo;
+    private List<RecipeEntity> favorites;
     
   
   
     public UserModel registerUser(UserModel user) throws UserException 
     {
-        if(user.getEmail() != null && user.getPassword() != null && user.getUserName() != null)
+        if(user.getEmail() != null && user.getPassword() != null && user.getName()!= null)
         {
             if(userRepo.findByEmail(user.getEmail()).isEmpty())
             {
@@ -33,8 +41,10 @@ public class UserService {
             }
         }else{
             throw new UserException("required fields are null");
+
         }
     }
+
 
   
     
@@ -59,7 +69,7 @@ public class UserService {
     {
         UserModel model = new UserModel()
         .email(user.getEmail())
-        .userName(user.getName())
+        .name(user.getName())
         .id(user.getId())
         .password(user.getPassword());
 
@@ -72,7 +82,7 @@ public class UserService {
     {
         UserEntity entity = new UserEntity()
         .email(user.getEmail())
-        .name(user.getUserName())
+        .name(user.getName())
         .id(user.getId())
         .password(user.getPassword());
 
@@ -93,18 +103,36 @@ public class UserService {
 
 
         
+
     }
 
-    // public UserModel updateUser(UserModel user){
-    //     if(user.getId() == null)
-    //         throw new UserException("can't update user without id");
-    //     UserEntity entity = userRepo.findById(user.getId()).orElseThrow(()-> new UserException("no user with this id"));
-    //     entity.userName(user.getUserName()).password(user.getPassword()).email(user.getEmail());
-    //     userRepo.save(entity);
-    //     return userMapper.UserEntityToUserModel(entity); 
-    // }
+    public UserModel updateUser(UserModel user ,RecipeModel rModel ){
+        if(user.getId() == null&&rModel.getId() == null)
+            throw new UserException("can't  user  or recipe with this id");
+
+        UserEntity entity = userRepo.findById(user.getId()).orElseThrow(()-> new UserException("no user with this id"));
+        
+        RecipeEntity  rEntity = userRepo.findById(rModel.getId()).orElseThrow(()-> new UserException("no recipe with this id"));
+     
+       // rEntity.getUsers_added_to_favorite();
+        userRepo.save(entity);
+        
+        return UserEntityToUserModel(entity); 
 
 
-  
+        //   entity.name(user.getUserName()).password(user.getPassword()).email(user.getEmail());
+           // if(rModel.getId() == null)
+           // throw new UserException("can't update user without id");
+           // RecipeEntity  rEntity = RecipeRepo.findById(rModel.getId()).orElseThrow(()-> new RecipeException("no user with this id"));
+           //     favorites = entity.getFavorites();
+               
+   
+          // UserEntityToUserModel(entity) .user_favorite(entity.getFavorites());
+           //entity.favorites(favorites);
+           
+    }
+
+
+   
 
 }
