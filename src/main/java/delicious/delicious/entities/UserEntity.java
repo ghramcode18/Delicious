@@ -38,6 +38,7 @@ public class UserEntity{
     @ManyToMany(mappedBy = "users_clicked_recipe")
     private List<RecipeEntity> clicks;
 
+    
     public UserEntity() {
     }
 
