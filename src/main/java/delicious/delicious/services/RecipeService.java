@@ -40,7 +40,7 @@
 //                     .type(rEntity.getType())
 //                     .price(rEntity.getPrice())
 //                     .imgrate(rEntity.getImgrate())
-//                     .recipe_steps(getrecipe_steps(rEntity.getRecipe_steps()));
+//                     .recipe_steps(getrecipe_steps(rEntity.getSteps()));
 
 //                     RecipeModels.add(Model);
                     
@@ -58,7 +58,7 @@
 //      Recipe_StepsModel rModel =new Recipe_StepsModel();
 //      rModel.id(recipe_steps.getId())
 //      .descripion(recipe_steps.getDescripion())
-//      .step_number(recipe_steps.getStep_number());
+//      .step_number(recipe_steps.getStep_Number());
  
 //         return recipe_StepsModelToRecipe_stepEntity(rModel);
 //     }
@@ -68,7 +68,7 @@
 //     {  Recipe_StepsModel rModel =new Recipe_StepsModel();
 //         rModel.id(recipe_steps.getId())
 //         .descripion(recipe_steps.getDescripion())
-//         .step_number(recipe_steps.getStep_number());
+//         .step_number(recipe_steps.getStep_Number());
 
 //         return rModel;
 
@@ -76,10 +76,9 @@
 //     }
 //     private Recipe_stepsEntity recipe_StepsModelToRecipe_stepEntity( Recipe_StepsModel recipe_steps)
 //     {  Recipe_stepsEntity entity =new Recipe_stepsEntity();
-//         entity.id(recipe_steps.getId())
-//         .descripion(recipe_steps.getDescripion())
-//         .step_number(recipe_steps.getStep_number());
-
+//         entity.Id(recipe_steps.getId())
+//         .Descripion(recipe_steps.getDescripion())
+//          .step_Number (recipe_steps.getStep_number());
 //         return entity;
 
 

@@ -22,8 +22,7 @@ public class Recipe_stepsEntity {
     private Integer step_Number;
     @Column(nullable = true)
     private String Descripion;
-    //(mappedBy = "idRecipe_step")
-   @OneToOne
+    @OneToOne
     private RecipeEntity recipe;
 
     public Recipe_stepsEntity() {
