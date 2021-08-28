@@ -7,7 +7,7 @@ import delicious.delicious.entities.RecipeEntity;
 
 public class UserModel {
     private Integer id;
-    private String userName ;
+    private String name ;
     private String email;
     private String password ;
     private List  <RecipeEntity>recipe_favoriteModel;
@@ -17,9 +17,9 @@ public class UserModel {
     public UserModel() {
     }
 
-    public UserModel(Integer id, String userName, String email, String password, List<RecipeEntity> recipe_favoriteModel, List<RecipeEntity> recipes_clicksModel) {
+    public UserModel(Integer id, String name, String email, String password, List<RecipeEntity> recipe_favoriteModel, List<RecipeEntity> recipes_clicksModel) {
         this.id = id;
-        this.userName = userName;
+        this.name = name;
         this.email = email;
         this.password = password;
         this.recipe_favoriteModel = recipe_favoriteModel;
@@ -34,12 +34,12 @@ public class UserModel {
         this.id = id;
     }
 
-    public String getUserName() {
-        return this.userName;
+    public String getName() {
+        return this.name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -79,8 +79,8 @@ public class UserModel {
         return this;
     }
 
-    public UserModel userName(String userName) {
-        setUserName(userName);
+    public UserModel name(String name) {
+        setName(name);
         return this;
     }
 
@@ -112,24 +112,24 @@ public class UserModel {
             return false;
         }
         UserModel userModel = (UserModel) o;
-        return Objects.equals(id, userModel.id) && Objects.equals(userName, userModel.userName) && Objects.equals(email, userModel.email) && Objects.equals(password, userModel.password) && Objects.equals(recipe_favoriteModel, userModel.recipe_favoriteModel) && Objects.equals(recipes_clicksModel, userModel.recipes_clicksModel);
+        return Objects.equals(id, userModel.id) && Objects.equals(name, userModel.name) && Objects.equals(email, userModel.email) && Objects.equals(password, userModel.password) && Objects.equals(recipe_favoriteModel, userModel.recipe_favoriteModel) && Objects.equals(recipes_clicksModel, userModel.recipes_clicksModel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, email, password, recipe_favoriteModel, recipes_clicksModel);
+        return Objects.hash(id, name, email, password, recipe_favoriteModel, recipes_clicksModel);
     }
 
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", userName='" + getUserName() + "'" +
+            ", name='" + getName() + "'" +
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", recipe_favoriteModel='" + getRecipe_favoriteModel() + "'" +
             ", recipes_clicksModel='" + getRecipes_clicksModel() + "'" +
             "}";
     }
-  
+
 }

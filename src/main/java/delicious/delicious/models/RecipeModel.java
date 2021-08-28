@@ -13,7 +13,6 @@ public class RecipeModel {
     private double price ;
     private String type ;
     private Recipe_stepsEntity steps ;
-    
     private String imgrate;
     private List <UserEntity>user_favorite;
     private List <UserEntity>user_clike;
