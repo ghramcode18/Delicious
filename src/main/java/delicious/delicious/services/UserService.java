@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import delicious.delicious.entities.RecipeEntity;
 import delicious.delicious.entities.UserEntity;
-import delicious.delicious.exceptions.RecipeException;
 import delicious.delicious.exceptions.UserException;
 import delicious.delicious.models.RecipeModel;
 import delicious.delicious.models.UserModel;
@@ -100,85 +99,58 @@ public class UserService {
         if(userModel.getId()!= null)
         entity = userRepo.findById(userModel.getId()).orElseThrow(()-> new UserException("no user with this id"));
         userRepo.delete(entity);
-        //entity = new UserEntity();
-      //  userRepo.save(entity);
         return entity;
 
 
-        
-
     }
 
-    /*
-     public boolean addLike(LikeRequest request)
-    {
-        likeRepo.save(
-            new LikeEntity(
-                null,
-                 
-                userRepo.findById(request.getUserID()).orElseThrow(
-                    ()-> new UserErrorException("no user with this id")),
-
-                postRepo.findById(request.getPostID()).orElseThrow(
-                    ()-> new PostErrorException("no post with this id "))
-
-            )
-        );
-        return true;
-    }
-
-    */
     public UserModel addFavorite(Integer id,RecipeModel rModel ){
         if(id == null)
             throw new UserException("can't  user  or recipe with this id");
 
         UserEntity entity = userRepo.findById(id).orElseThrow(()-> new UserException("no user with this id"));
-        
-        // RecipeEntity  rEntity = recipeRepo.findAllById(rModel.).orElseThrow(()-> new UserException("no recipe with this id"));
-        entity.getFavorites().add(RecipeModelToRecipeEntity(rModel));
+                entity.getFavorites().add(RecipeModelToRecipeEntity(rModel));
         userRepo.save(entity);
         return UserEntityToUserModel(entity); 
 
       
     }
 
-    //  public  List<RecipeModel>  getFavorite (Integer id )
-    //  {  if(id == null)
-    //     throw new UserException("can't  user with this id");
-    //     UserEntity entity = userRepo.findById(id).orElseThrow(()-> new UserException("no user with this id"));
-    //     return  ListRecipeEntityToRecipeListModel(entity.getFavorites());
+     public  List<RecipeModel>  getFavorite (Integer id )
+     {  if(id == null)
+        throw new UserException("can't  user with this id");
+        UserEntity entity = userRepo.findById(id).orElseThrow(()-> new UserException("no user with this id"));
+        return  ListRecipeEntityToRecipeListModel(entity.getFavorites());
         
-    //  }
-        // public List <RecipeModel> ListRecipeEntityToRecipeListModel (  List <RecipeEntity> recipeModels)
-        // {//TODO IN ARRAYLIST
-        //  List <RecipeEntity >entity  = new ArrayList<>();
-        //  if (entity.size()>0) {
-        //  for (RecipeEntity recipeEntity : entity) {
-        //     RecipeModel rModel = new RecipeModel();
-        //     rModel.id(recipeEntity.getId())
-        //     .name(recipeEntity.getName())
-        //     .image(recipeEntity.getImage())
-        //     .imgrate(recipeEntity.getImgrate())
-        //     .price(recipeEntity.getPrice())
-        //     .type(recipeEntity.getType())
-        //     .recipe_steps(recipeEntity.getSteps())
-        //     .user_favorite(recipeEntity.getUsers_added_to_favorite())
-        //     .user_clike(recipeEntity.getUser_clicks());
-            
-
-        //       entity.add(RecipeModelToRecipeEntity(rModel));
-              
-        //     }
-        //     return entity;
-        // }
-        //     else return new ArrayList<RecipeModel>();
+     }
+        public List <RecipeModel> ListRecipeEntityToRecipeListModel (  List <RecipeEntity> recipeEntities)
+        {
+         List <RecipeModel >recipeModels  = new ArrayList<>();
+         if (recipeEntities.size()>0) {
+         for (RecipeEntity recipeEntity : recipeEntities) {
+            RecipeModel rModel = new RecipeModel();
+            rModel.id(recipeEntity.getId())
+            .name(recipeEntity.getName())
+            .image(recipeEntity.getImage())
+            .imgrate(recipeEntity.getImgrate())
+            .price(recipeEntity.getPrice())
+            .type(recipeEntity.getType())
+            .recipe_steps(recipeEntity.getSteps())
+            .user_favorite(recipeEntity.getUsers_added_to_favorite())
+            .user_clike(recipeEntity.getUser_clicks());
+            recipeModels.add(rModel);
+     
+            }
+            return recipeModels;
+        }
+            else return new ArrayList<RecipeModel>();
     
-        //  }
+         }
         
-         public List <RecipeEntity> ListRecipeEntityToListRecipeModel  (  List <RecipeModel> recipeModels)
-         {//TODO IN ARRAYLIST
+         public List <RecipeEntity> ListRecipeModelToListRecipeMEntities  (  List <RecipeModel> recipeModels)
+         {
           List <RecipeEntity >entity  = new ArrayList<>();
-          if (entity.size()>0) {
+          if (recipeModels.size()>0) {
           for (RecipeEntity recipeEntity : entity) {
              RecipeModel rModel = new RecipeModel();
              rModel.id(recipeEntity.getId())
@@ -219,14 +191,5 @@ public class UserService {
 
       
 
-        //   entity.name(user.getUserName()).password(user.getPassword()).email(user.getEmail());
-           // if(rModel.getId() == null)
-           // throw new UserException("can't update user without id");
-           // RecipeEntity  rEntity = RecipeRepo.findById(rModel.getId()).orElseThrow(()-> new RecipeException("no user with this id"));
-           //     favorites = entity.getFavorites();
-               
-   
-          // UserEntityToUserModel(entity) .user_favorite(entity.getFavorites());
-           //entity.favorites(favorites);
- 
+      
 }

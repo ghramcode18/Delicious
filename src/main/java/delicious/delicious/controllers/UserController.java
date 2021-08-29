@@ -2,6 +2,8 @@ package delicious.delicious.controllers;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,7 @@ import delicious.delicious.services.RecipeService;
 import delicious.delicious.services.UserService;
 
 @RestController
-@RequestMapping(path = {"/api/v1","/api/v1/recipe"})
+@RequestMapping(path = {"/api/v1/auth","/api/v1"})
 public class UserController {
     @Autowired
     UserService userService;
@@ -55,11 +57,11 @@ public class UserController {
     }
 
     }
-//    @RequestMapping(value ="/getFavorites/{num}",method = RequestMethod.GET)
-//    public List<RecipeModel> getFavorite(@PathVariable (name = "id")Integer id)
-//    {
-//     return  userService.getFavorite(id);
-//    }
+   @RequestMapping(value ="/getFavorites/{num}",method = RequestMethod.GET)
+   public List<RecipeModel> getFavorite(@PathVariable (name = "num")Integer id)
+   {
+    return  userService.getFavorite(id);
+   }
  
    @RequestMapping(value ="/addFavorite/{num}",method = RequestMethod.POST)
    public UserModel addFavorite(@PathVariable (name = "num")Integer id,RecipeModel rModel)
