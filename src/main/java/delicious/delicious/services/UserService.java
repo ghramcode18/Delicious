@@ -2,6 +2,7 @@ package delicious.delicious.services;
 
     
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,9 @@ public class UserService {
         .email(user.getEmail())
         .name(user.getName())
         .id(user.getId())
-        .password(user.getPassword());
+        .password(user.getPassword())
+        .recipe_favoriteModel(user.getFavorites())
+        .recipes_clicksModel(user.getClicks());
 
         return model;
 
@@ -94,11 +97,12 @@ public class UserService {
 
     public  UserEntity logout (UserModel userModel)
     {
-        UserEntity entity;
+        UserEntity entity = new UserEntity();
         if(userModel.getId()!= null)
         entity = userRepo.findById(userModel.getId()).orElseThrow(()-> new UserException("no user with this id"));
-        entity = new UserEntity();
-        userRepo.save(entity);
+        userRepo.delete(entity);
+        //entity = new UserEntity();
+      //  userRepo.save(entity);
         return entity;
 
 
@@ -106,19 +110,64 @@ public class UserService {
 
     }
 
-    public UserModel updateUser(UserModel user ,RecipeModel rModel ){
-        if(user.getId() == null&&rModel.getId() == null)
+    public UserModel updateUser(UserModel user , List< RecipeModel> rModel ){
+        if(user.getId() == null)
             throw new UserException("can't  user  or recipe with this id");
 
         UserEntity entity = userRepo.findById(user.getId()).orElseThrow(()-> new UserException("no user with this id"));
         
-        RecipeEntity  rEntity = userRepo.findById(rModel.getId()).orElseThrow(()-> new UserException("no recipe with this id"));
-     
-       // rEntity.getUsers_added_to_favorite();
+        // RecipeEntity  rEntity = recipeRepo.findAllById(rModel.).orElseThrow(()-> new UserException("no recipe with this id"));
+        entity.setFavorites(ListRecipeModelToRecipeEntity(rModel));
         userRepo.save(entity);
-        
         return UserEntityToUserModel(entity); 
 
+      
+    }
+
+        public List <RecipeEntity> ListRecipeModelToRecipeEntity  (  List <RecipeModel> recipeModels)
+        {
+         List <RecipeEntity >entity  = new ArrayList<>();
+         if (entity.size()>0) {
+         for (RecipeEntity recipeEntity : entity) {
+         RecipeModel rModel = new RecipeModel();
+         rModel.id(recipeEntity.getId())
+         .name(recipeEntity.getName())
+         .image(recipeEntity.getImage())
+         .imgrate(recipeEntity.getImgrate())
+         .price(recipeEntity.getPrice())
+         .type(recipeEntity.getType())
+         .recipe_steps(recipeEntity.getSteps())
+         .user_favorite(recipeEntity.getUsers_added_to_favorite())
+         .user_clike(recipeEntity.getUser_clicks());
+         
+
+              entity.add(RecipeModelToRecipeEntity(rModel));
+              
+            }
+            return entity;
+        }
+            else return new ArrayList<RecipeEntity>();
+    
+         }
+        
+
+
+
+        private RecipeEntity RecipeModelToRecipeEntity(RecipeModel rModel) {
+        RecipeEntity rEntity = new RecipeEntity();
+        rEntity.id(rModel.getId())
+        .name(rModel.getName())
+        .image(rModel.getImage())
+        .type(rModel.getType())
+        .price(rModel.getPrice())
+        .user_clicks(rModel.getUser_clike())
+        .imgrate(rModel.getImgrate())
+        .users_added_to_favorite(rModel.getUser_favorite())
+        .steps(rModel.getRecipe_steps());
+            return rEntity;
+        }
+
+      
 
         //   entity.name(user.getUserName()).password(user.getPassword()).email(user.getEmail());
            // if(rModel.getId() == null)
@@ -129,10 +178,5 @@ public class UserService {
    
           // UserEntityToUserModel(entity) .user_favorite(entity.getFavorites());
            //entity.favorites(favorites);
-           
-    }
-
-
-   
-
+ 
 }
