@@ -22,6 +22,16 @@ public class RecipeService {
     @Autowired
     Recipe_StepsRepo recipe_StepsRepo;
 
+   int key;
+
+    //  switch (type) {
+    //     case value:
+            
+    //         break;
+    
+    //     default:
+    //         break;
+    // }
 
     public List <RecipeModel> sendRecipe ()
     {
@@ -31,9 +41,131 @@ public class RecipeService {
             if (recipeEntities.size()>0) {
                 List <RecipeModel>RecipeModels = new ArrayList<>();
 
+                     switch (key) {
+                        case 0:
+                        getsalad();
+                            // for ( RecipeEntity rEntity:recipeEntities) {
+
+                            //     RecipeModel Model =RecipeEntityToRecepeModel( recipeRepo.findBytype("salad"));
+                            //     Model.id(rEntity.getId())
+                            //     .name(rEntity.getName())
+                            //     .image(rEntity.getImage())
+                            //     .type(rEntity.getType())
+                            //     .price(rEntity.getPrice())
+                            //     .imgrate(rEntity.getImgrate())
+                            //     .recipe_steps(getrecipe_steps(rEntity.getSteps()));
+            
+                            //     RecipeModels.add(Model);
+                                
+                            // }
+                            // return RecipeModels;
+                       case 1: 
+                       getsandwishes();
+                                
+                            // for ( RecipeEntity rEntity:recipeEntities) {
+
+                            //     RecipeModel Model =RecipeEntityToRecepeModel( recipeRepo.findBytype("sandwishes"));
+                            //     Model.id(rEntity.getId())
+                            //     .name(rEntity.getName())
+                            //     .image(rEntity.getImage())
+                            //     .type(rEntity.getType())
+                            //     .price(rEntity.getPrice())
+                            //     .imgrate(rEntity.getImgrate())
+                            //     .recipe_steps(getrecipe_steps(rEntity.getSteps()));
+            
+                            //     RecipeModels.add(Model);
+                                
+                            // }
+                            // return RecipeModels;
+                         case 3:
+                         getpizza();
+                            // for ( RecipeEntity rEntity:recipeEntities) {
+
+                            //     RecipeModel Model =RecipeEntityToRecepeModel( recipeRepo.findBytype("pizza"));
+                            //     Model.id(rEntity.getId())
+                            //     .name(rEntity.getName())
+                            //     .image(rEntity.getImage())
+                            //     .type(rEntity.getType())
+                            //     .price(rEntity.getPrice())
+                            //     .imgrate(rEntity.getImgrate())
+                            //     .recipe_steps(getrecipe_steps(rEntity.getSteps()));
+            
+                            //     RecipeModels.add(Model);
+                                
+                            // }
+                            // return RecipeModels;   
+                        case 4:
+                        getmeals();
+                        //     for ( RecipeEntity rEntity:recipeEntities) {
+
+                        //         RecipeModel Model =RecipeEntityToRecepeModel( recipeRepo.findBytype("meals"));
+                        //         Model.id(rEntity.getId())
+                        //         .name(rEntity.getName())
+                        //         .image(rEntity.getImage())
+                        //         .type(rEntity.getType())
+                        //         .price(rEntity.getPrice())
+                        //         .imgrate(rEntity.getImgrate())
+                        //         .recipe_steps(getrecipe_steps(rEntity.getSteps()));
+            
+                        //         RecipeModels.add(Model);
+                                
+                        //     }
+                        // return RecipeModels;  
+                        default :
+                        return new ArrayList<RecipeModel>();
+                    }
+         
+                
+            }
+            else return new ArrayList<RecipeModel>();
+    
+    }
+
+    private  List <RecipeModel>getsalad()
+    {
+ 
+        List <RecipeEntity>recipeEntities = recipeRepo.findAll();
+  
+
+            if (recipeEntities.size()>0) {
+                List <RecipeModel>RecipeModels = new ArrayList<>();
+
                 for ( RecipeEntity rEntity:recipeEntities) {
 
-                    RecipeModel Model = new RecipeModel();
+                    RecipeModel Model =RecipeEntityToRecepeModel( recipeRepo.findBytype("salad"));
+                    Model.id(rEntity.getId())
+                    .name(rEntity.getName())
+                    .image(rEntity.getImage())
+                    .type(rEntity.getType())
+                    .price(rEntity.getPrice())
+                    .imgrate(rEntity.getImgrate())
+                    .recipe_steps(getrecipe_steps(rEntity.getSteps()));
+
+                    RecipeModels.add(Model);
+                    
+                        }
+                    return RecipeModels;
+            }
+            else return new ArrayList<RecipeModel>();
+    
+
+    }
+
+
+
+    private  List <RecipeModel>getmeals()
+    {
+
+
+        List <RecipeEntity>recipeEntities = recipeRepo.findAll();
+  
+
+            if (recipeEntities.size()>0) {
+                List <RecipeModel>RecipeModels = new ArrayList<>();
+                 
+                for ( RecipeEntity rEntity:recipeEntities) {
+
+                    RecipeModel Model =RecipeEntityToRecepeModel( recipeRepo.findBytype("meals"));
                     Model.id(rEntity.getId())
                     .name(rEntity.getName())
                     .image(rEntity.getImage())
@@ -46,10 +178,70 @@ public class RecipeService {
                     
                 }
                 return RecipeModels;
-                
             }
             else return new ArrayList<RecipeModel>();
     
+
+    }
+    
+
+    private  List <RecipeModel>getpizza()
+    {List <RecipeEntity>recipeEntities = recipeRepo.findAll();
+  
+
+        if (recipeEntities.size()>0) {
+            List <RecipeModel>RecipeModels = new ArrayList<>();
+             
+            for ( RecipeEntity rEntity:recipeEntities) {
+
+                RecipeModel Model =RecipeEntityToRecepeModel( recipeRepo.findBytype("pizza"));
+                Model.id(rEntity.getId())
+                .name(rEntity.getName())
+                .image(rEntity.getImage())
+                .type(rEntity.getType())
+                .price(rEntity.getPrice())
+                .imgrate(rEntity.getImgrate())
+                .recipe_steps(getrecipe_steps(rEntity.getSteps()));
+
+                RecipeModels.add(Model);
+                
+            }
+            return RecipeModels;
+        }
+        else return new ArrayList<RecipeModel>();
+
+}
+
+    private  List <RecipeModel>getsandwishes()
+    {List <RecipeEntity>recipeEntities = recipeRepo.findAll();
+  
+
+        if (recipeEntities.size()>0) {
+            List <RecipeModel>RecipeModels = new ArrayList<>();
+             
+            for ( RecipeEntity rEntity:recipeEntities) {
+
+                RecipeModel Model =RecipeEntityToRecepeModel( recipeRepo.findBytype("sandwishes"));
+                Model.id(rEntity.getId())
+                .name(rEntity.getName())
+                .image(rEntity.getImage())
+                .type(rEntity.getType())
+                .price(rEntity.getPrice())
+                .imgrate(rEntity.getImgrate())
+                .recipe_steps(getrecipe_steps(rEntity.getSteps()));
+
+                RecipeModels.add(Model);
+                
+            }
+            return RecipeModels;
+        }
+        else return new ArrayList<RecipeModel>();
+
+}
+    
+    
+    private RecipeModel RecipeEntityToRecepeModel(Optional<RecipeEntity> findBytype) {
+        return null;
     }
 
 

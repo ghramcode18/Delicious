@@ -117,7 +117,7 @@ public class UserService {
         UserEntity entity = userRepo.findById(user.getId()).orElseThrow(()-> new UserException("no user with this id"));
         
         // RecipeEntity  rEntity = recipeRepo.findAllById(rModel.).orElseThrow(()-> new UserException("no recipe with this id"));
-        entity.setFavorites(ListRecipeModelToRecipeEntity(rModel));
+        entity.getFavorites().add(RecipeModelToRecipeEntity(rModel));
         userRepo.save(entity);
         return UserEntityToUserModel(entity); 
 
@@ -125,21 +125,21 @@ public class UserService {
     }
 
         public List <RecipeEntity> ListRecipeModelToRecipeEntity  (  List <RecipeModel> recipeModels)
-        {
+        {//TODO IN ARRAYLIST
          List <RecipeEntity >entity  = new ArrayList<>();
          if (entity.size()>0) {
          for (RecipeEntity recipeEntity : entity) {
-         RecipeModel rModel = new RecipeModel();
-         rModel.id(recipeEntity.getId())
-         .name(recipeEntity.getName())
-         .image(recipeEntity.getImage())
-         .imgrate(recipeEntity.getImgrate())
-         .price(recipeEntity.getPrice())
-         .type(recipeEntity.getType())
-         .recipe_steps(recipeEntity.getSteps())
-         .user_favorite(recipeEntity.getUsers_added_to_favorite())
-         .user_clike(recipeEntity.getUser_clicks());
-         
+            RecipeModel rModel = new RecipeModel();
+            rModel.id(recipeEntity.getId())
+            .name(recipeEntity.getName())
+            .image(recipeEntity.getImage())
+            .imgrate(recipeEntity.getImgrate())
+            .price(recipeEntity.getPrice())
+            .type(recipeEntity.getType())
+            .recipe_steps(recipeEntity.getSteps())
+            .user_favorite(recipeEntity.getUsers_added_to_favorite())
+            .user_clike(recipeEntity.getUser_clicks());
+            
 
               entity.add(RecipeModelToRecipeEntity(rModel));
               
