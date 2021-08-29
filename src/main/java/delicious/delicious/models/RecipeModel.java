@@ -12,8 +12,8 @@ public class RecipeModel {
     private String image ;
     private double price ;
     private String type ;
-    private Recipe_stepsEntity steps ;
     private String imgrate;
+    private Recipe_stepsEntity steps ;
     private List <UserEntity>user_favorite;
     private List <UserEntity>user_clike;
     private Recipe_stepsEntity recipe_steps;

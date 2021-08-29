@@ -25,7 +25,6 @@ public class UserService {
     UserRepo userRepo;
     @Autowired
     RecipeRepo recipeRepo;
-    private List<RecipeEntity> favorites;
     
   
   
@@ -110,11 +109,30 @@ public class UserService {
 
     }
 
-    public UserModel updateUser(UserModel user , List< RecipeModel> rModel ){
-        if(user.getId() == null)
+    /*
+     public boolean addLike(LikeRequest request)
+    {
+        likeRepo.save(
+            new LikeEntity(
+                null,
+                 
+                userRepo.findById(request.getUserID()).orElseThrow(
+                    ()-> new UserErrorException("no user with this id")),
+
+                postRepo.findById(request.getPostID()).orElseThrow(
+                    ()-> new PostErrorException("no post with this id "))
+
+            )
+        );
+        return true;
+    }
+
+    */
+    public UserModel addFavorite(Integer id,RecipeModel rModel ){
+        if(id == null)
             throw new UserException("can't  user  or recipe with this id");
 
-        UserEntity entity = userRepo.findById(user.getId()).orElseThrow(()-> new UserException("no user with this id"));
+        UserEntity entity = userRepo.findById(id).orElseThrow(()-> new UserException("no user with this id"));
         
         // RecipeEntity  rEntity = recipeRepo.findAllById(rModel.).orElseThrow(()-> new UserException("no recipe with this id"));
         entity.getFavorites().add(RecipeModelToRecipeEntity(rModel));
@@ -124,32 +142,64 @@ public class UserService {
       
     }
 
-        public List <RecipeEntity> ListRecipeModelToRecipeEntity  (  List <RecipeModel> recipeModels)
-        {//TODO IN ARRAYLIST
-         List <RecipeEntity >entity  = new ArrayList<>();
-         if (entity.size()>0) {
-         for (RecipeEntity recipeEntity : entity) {
-            RecipeModel rModel = new RecipeModel();
-            rModel.id(recipeEntity.getId())
-            .name(recipeEntity.getName())
-            .image(recipeEntity.getImage())
-            .imgrate(recipeEntity.getImgrate())
-            .price(recipeEntity.getPrice())
-            .type(recipeEntity.getType())
-            .recipe_steps(recipeEntity.getSteps())
-            .user_favorite(recipeEntity.getUsers_added_to_favorite())
-            .user_clike(recipeEntity.getUser_clicks());
+    //  public  List<RecipeModel>  getFavorite (Integer id )
+    //  {  if(id == null)
+    //     throw new UserException("can't  user with this id");
+    //     UserEntity entity = userRepo.findById(id).orElseThrow(()-> new UserException("no user with this id"));
+    //     return  ListRecipeEntityToRecipeListModel(entity.getFavorites());
+        
+    //  }
+        // public List <RecipeModel> ListRecipeEntityToRecipeListModel (  List <RecipeEntity> recipeModels)
+        // {//TODO IN ARRAYLIST
+        //  List <RecipeEntity >entity  = new ArrayList<>();
+        //  if (entity.size()>0) {
+        //  for (RecipeEntity recipeEntity : entity) {
+        //     RecipeModel rModel = new RecipeModel();
+        //     rModel.id(recipeEntity.getId())
+        //     .name(recipeEntity.getName())
+        //     .image(recipeEntity.getImage())
+        //     .imgrate(recipeEntity.getImgrate())
+        //     .price(recipeEntity.getPrice())
+        //     .type(recipeEntity.getType())
+        //     .recipe_steps(recipeEntity.getSteps())
+        //     .user_favorite(recipeEntity.getUsers_added_to_favorite())
+        //     .user_clike(recipeEntity.getUser_clicks());
             
 
-              entity.add(RecipeModelToRecipeEntity(rModel));
+        //       entity.add(RecipeModelToRecipeEntity(rModel));
               
-            }
-            return entity;
-        }
-            else return new ArrayList<RecipeEntity>();
+        //     }
+        //     return entity;
+        // }
+        //     else return new ArrayList<RecipeModel>();
     
-         }
+        //  }
         
+         public List <RecipeEntity> ListRecipeEntityToListRecipeModel  (  List <RecipeModel> recipeModels)
+         {//TODO IN ARRAYLIST
+          List <RecipeEntity >entity  = new ArrayList<>();
+          if (entity.size()>0) {
+          for (RecipeEntity recipeEntity : entity) {
+             RecipeModel rModel = new RecipeModel();
+             rModel.id(recipeEntity.getId())
+             .name(recipeEntity.getName())
+             .image(recipeEntity.getImage())
+             .imgrate(recipeEntity.getImgrate())
+             .price(recipeEntity.getPrice())
+             .type(recipeEntity.getType())
+             .recipe_steps(recipeEntity.getSteps())
+             .user_favorite(recipeEntity.getUsers_added_to_favorite())
+             .user_clike(recipeEntity.getUser_clicks());
+             
+ 
+               entity.add(RecipeModelToRecipeEntity(rModel));
+               
+             }
+             return entity;
+         }
+             else return new ArrayList<RecipeEntity>();
+     
+          }
 
 
 
