@@ -10,5 +10,3 @@ public class DeliciousApplication {
 		SpringApplication.run(DeliciousApplication.class, args);
 		
 	}
-
-}
