@@ -30,7 +30,7 @@ public class RecipeEntity {
     private String image ;
 
     @Column(nullable = true)
-    private double price ;
+    private Double price ;
 
     @Column(nullable = true)
     private String type ;
