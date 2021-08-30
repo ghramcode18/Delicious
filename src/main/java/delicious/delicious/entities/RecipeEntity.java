@@ -30,7 +30,7 @@ public class RecipeEntity {
     private String image ;
 
     @Column(nullable = true)
-    private Integer price ;
+    private double price ;
 
     @Column(nullable = true)
     private String type ;
@@ -100,12 +100,12 @@ public class RecipeEntity {
         this.image = image;
     }
 
-    public Integer getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setPrice(double d) {
+        this.price = d;
     }
 
     public String getType() {
@@ -171,8 +171,8 @@ public class RecipeEntity {
         return this;
     }
 
-    public RecipeEntity price(Integer price) {
-        setPrice(price);
+    public RecipeEntity price(double d) {
+        setPrice(d);
         return this;
     }
 
