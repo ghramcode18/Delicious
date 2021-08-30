@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "recipe_steps")
 public class Recipe_stepsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
 
     @Column(nullable = true)

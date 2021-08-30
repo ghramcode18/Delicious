@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class RecipeEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(nullable = true)

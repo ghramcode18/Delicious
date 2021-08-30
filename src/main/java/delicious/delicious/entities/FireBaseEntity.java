@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name="firebase")
 public class FireBaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @ManyToOne(optional=true,targetEntity = UserEntity.class)
