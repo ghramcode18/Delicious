@@ -72,7 +72,7 @@ public class UserService {
         .id(user.getId())
         .password(user.getPassword())
         .recipe_favoriteModel(user.getFavorites())
-        .recipes_clicksModel(user.getClicks());
+        ;
 
         return model;
 

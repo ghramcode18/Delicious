@@ -30,7 +30,7 @@ public class RecipeEntity {
     private String image ;
 
     @Column(nullable = true)
-    private Double price ;
+    private Integer price ;
 
     @Column(nullable = true)
     private String type ;
@@ -38,7 +38,8 @@ public class RecipeEntity {
     @OneToOne
     private Recipe_stepsEntity steps ;
 
-    @Column(nullable = true)
+    // @Column(columnDefinition="TEXT")
+    @Column(length = 4000)
     private String imgrate;
 
     @ManyToMany(targetEntity = UserEntity.class)
@@ -62,7 +63,7 @@ public class RecipeEntity {
     public RecipeEntity() {
     }
 
-    public RecipeEntity(Integer id, String name, String image, double price, String type, Recipe_stepsEntity steps, String imgrate, List<UserEntity> users_added_to_favorite, List<UserEntity> user_clicks, Recipe_stepsEntity users_clicked_recipe) {
+    public RecipeEntity(Integer id, String name, String image, Integer price, String type, Recipe_stepsEntity steps, String imgrate, List<UserEntity> users_added_to_favorite, List<UserEntity> user_clicks, Recipe_stepsEntity users_clicked_recipe) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -99,11 +100,11 @@ public class RecipeEntity {
         this.image = image;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -170,7 +171,7 @@ public class RecipeEntity {
         return this;
     }
 
-    public RecipeEntity price(double price) {
+    public RecipeEntity price(Integer price) {
         setPrice(price);
         return this;
     }

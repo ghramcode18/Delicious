@@ -35,7 +35,7 @@ public class UserController {
          }
      }
      
-    @RequestMapping(value="/signIn", method=RequestMethod.GET)
+    @RequestMapping(value="/signIn", method=RequestMethod.POST)
     public Object signIn(@RequestBody UserModel user) {
         try{
             return userService.signIn(user);

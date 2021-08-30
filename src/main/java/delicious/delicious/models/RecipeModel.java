@@ -10,7 +10,7 @@ public class RecipeModel {
     private Integer id;
     private String name;
     private String image ;
-    private double price ;
+    private Integer price ;
     private String type ;
     private String imgrate;
     private Recipe_stepsEntity steps ;
@@ -21,7 +21,7 @@ public class RecipeModel {
     public RecipeModel() {
     }
 
-    public RecipeModel(Integer id, String name, String image, double price, String type, Recipe_stepsEntity steps, String imgrate, List<UserEntity> user_favorite, List<UserEntity> user_clike, Recipe_stepsEntity recipe_steps) {
+    public RecipeModel(Integer id, String name, String image, Integer price, String type, Recipe_stepsEntity steps, String imgrate, List<UserEntity> user_favorite, List<UserEntity> user_clike, Recipe_stepsEntity recipe_steps) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -58,11 +58,11 @@ public class RecipeModel {
         this.image = image;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -129,7 +129,7 @@ public class RecipeModel {
         return this;
     }
 
-    public RecipeModel price(double price) {
+    public RecipeModel price(Integer price) {
         setPrice(price);
         return this;
     }

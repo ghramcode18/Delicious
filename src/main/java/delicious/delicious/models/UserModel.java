@@ -11,19 +11,19 @@ public class UserModel {
     private String email;
     private String password ;
     private List  <RecipeEntity>recipe_favoriteModel;
-    private List  <RecipeEntity>recipes_clicksModel;
+  // private List  <RecipeEntity>recipes_clicksModel;
 
 
     public UserModel() {
     }
 
-    public UserModel(Integer id, String name, String email, String password, List<RecipeEntity> recipe_favoriteModel, List<RecipeEntity> recipes_clicksModel) {
+    public UserModel(Integer id, String name, String email, String password, List<RecipeEntity> recipe_favoriteModel) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.recipe_favoriteModel = recipe_favoriteModel;
-        this.recipes_clicksModel = recipes_clicksModel;
+      
     }
 
     public Integer getId() {
@@ -66,13 +66,10 @@ public class UserModel {
         this.recipe_favoriteModel = recipe_favoriteModel;
     }
 
-    public List<RecipeEntity> getRecipes_clicksModel() {
-        return this.recipes_clicksModel;
-    }
+   
+    
 
-    public void setRecipes_clicksModel(List<RecipeEntity> recipes_clicksModel) {
-        this.recipes_clicksModel = recipes_clicksModel;
-    }
+   
 
     public UserModel id(Integer id) {
         setId(id);
@@ -99,25 +96,21 @@ public class UserModel {
         return this;
     }
 
-    public UserModel recipes_clicksModel(List<RecipeEntity> recipes_clicksModel) {
-        setRecipes_clicksModel(recipes_clicksModel);
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof UserModel)) {
-            return false;
-        }
-        UserModel userModel = (UserModel) o;
-        return Objects.equals(id, userModel.id) && Objects.equals(name, userModel.name) && Objects.equals(email, userModel.email) && Objects.equals(password, userModel.password) && Objects.equals(recipe_favoriteModel, userModel.recipe_favoriteModel) && Objects.equals(recipes_clicksModel, userModel.recipes_clicksModel);
-    }
+  
+    // @Override
+    // public boolean equals(Object o) {
+    //     if (o == this)
+    //         return true;
+    //     if (!(o instanceof UserModel)) {
+    //         return false;
+    //     }
+    //     UserModel userModel = (UserModel) o;
+    //     return Objects.equals(id, userModel.id) && Objects.equals(name, userModel.name) && Objects.equals(email, userModel.email) && Objects.equals(password, userModel.password) && Objects.equals(recipe_favoriteModel, userModel.recipe_favoriteModel) );
+    // }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, recipe_favoriteModel, recipes_clicksModel);
+        return Objects.hash(id, name, email, password, recipe_favoriteModel);
     }
 
     @Override
@@ -128,7 +121,7 @@ public class UserModel {
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", recipe_favoriteModel='" + getRecipe_favoriteModel() + "'" +
-            ", recipes_clicksModel='" + getRecipes_clicksModel() + "'" +
+            
             "}";
     }
 
