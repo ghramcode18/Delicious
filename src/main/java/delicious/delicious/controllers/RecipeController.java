@@ -22,7 +22,7 @@ public class RecipeController {
     RecipeService recipeService;
 
     @RequestMapping(value = "/recipes/{str}",method = RequestMethod.GET)
-    public List<RecipeModel> listRecipe (@PathVariable (name = "str")String type)
+    public List<RecipeModel> getFoodForType (@PathVariable (name = "str")String type)
     {  
               return recipeService.getFoodForType(type);
        
