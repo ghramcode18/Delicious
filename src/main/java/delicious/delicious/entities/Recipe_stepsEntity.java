@@ -20,7 +20,7 @@ public class Recipe_stepsEntity {
 
     @Column(nullable = true)
     private Integer step_Number;
-    @Column(nullable = true)
+    @Column(columnDefinition = "TEXT", length = 43333000)
     private String Descripion;
     @OneToOne
     private RecipeEntity recipe;

@@ -39,7 +39,7 @@ public class RecipeEntity {
     private Recipe_stepsEntity steps ;
 
     // @Column(columnDefinition="TEXT")
-    @Column(length = 4000)
+    @Column(columnDefinition = "TEXT", length = 4000)
     private String imgrate;
 
     @ManyToMany(targetEntity = UserEntity.class)
