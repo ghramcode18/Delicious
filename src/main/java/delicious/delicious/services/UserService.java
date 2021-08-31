@@ -71,7 +71,6 @@ public class UserService {
         .name(user.getName())
         .id(user.getId())
         .password(user.getPassword())
-        .recipe_favoriteModel(user.getFavorites())
         ;
 
         return model;

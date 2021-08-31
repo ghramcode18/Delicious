@@ -10,19 +10,18 @@ public class UserModel {
     private String name ;
     private String email;
     private String password ;
-    private List  <RecipeEntity>recipe_favoriteModel;
+    // private List  <RecipeEntity>recipe_favoriteModel;
   // private List  <RecipeEntity>recipes_clicksModel;
 
 
     public UserModel() {
     }
 
-    public UserModel(Integer id, String name, String email, String password, List<RecipeEntity> recipe_favoriteModel) {
+    public UserModel(Integer id, String name, String email, String passwordl) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.recipe_favoriteModel = recipe_favoriteModel;
       
     }
 
@@ -58,13 +57,13 @@ public class UserModel {
         this.password = password;
     }
 
-    public List<RecipeEntity> getRecipe_favoriteModel() {
-        return this.recipe_favoriteModel;
-    }
+    // public List<RecipeEntity> getRecipe_favoriteModel() {
+    //     return this.recipe_favoriteModel;
+    // }
 
-    public void setRecipe_favoriteModel(List<RecipeEntity> recipe_favoriteModel) {
-        this.recipe_favoriteModel = recipe_favoriteModel;
-    }
+    // public void setRecipe_favoriteModel(List<RecipeEntity> recipe_favoriteModel) {
+    //     this.recipe_favoriteModel = recipe_favoriteModel;
+    // }
 
    
     
@@ -91,10 +90,10 @@ public class UserModel {
         return this;
     }
 
-    public UserModel recipe_favoriteModel(List<RecipeEntity> recipe_favoriteModel) {
-        setRecipe_favoriteModel(recipe_favoriteModel);
-        return this;
-    }
+    // public UserModel recipe_favoriteModel(List<RecipeEntity> recipe_favoriteModel) {
+    //     setRecipe_favoriteModel(recipe_favoriteModel);
+    //     return this;
+    // }
 
   
     // @Override
@@ -110,7 +109,7 @@ public class UserModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, recipe_favoriteModel);
+        return Objects.hash(id, name, email, password);
     }
 
     @Override
@@ -120,7 +119,7 @@ public class UserModel {
             ", name='" + getName() + "'" +
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
-            ", recipe_favoriteModel='" + getRecipe_favoriteModel() + "'" +
+            
             
             "}";
     }
