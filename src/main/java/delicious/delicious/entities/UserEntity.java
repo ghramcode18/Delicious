@@ -11,12 +11,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
-
 @Entity
 @Table(name = "user")
-public class UserEntity{
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +37,8 @@ public class UserEntity{
     public UserEntity() {
     }
 
-    public UserEntity(Integer id, String name, String email, String password, List<RecipeEntity> favorites, List<RecipeEntity> clicks, List<FireBaseEntity> firebase) {
+    public UserEntity(Integer id, String name, String email, String password, List<RecipeEntity> favorites,
+            List<RecipeEntity> clicks, List<FireBaseEntity> firebase) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -149,7 +147,10 @@ public class UserEntity{
             return false;
         }
         UserEntity userEntity = (UserEntity) o;
-        return Objects.equals(id, userEntity.id) && Objects.equals(name, userEntity.name) && Objects.equals(email, userEntity.email) && Objects.equals(password, userEntity.password) && Objects.equals(favorites, userEntity.favorites) && Objects.equals(clicks, userEntity.clicks) && Objects.equals(firebase, userEntity.firebase);
+        return Objects.equals(id, userEntity.id) && Objects.equals(name, userEntity.name)
+                && Objects.equals(email, userEntity.email) && Objects.equals(password, userEntity.password)
+                && Objects.equals(favorites, userEntity.favorites) && Objects.equals(clicks, userEntity.clicks)
+                && Objects.equals(firebase, userEntity.firebase);
     }
 
     @Override
@@ -159,15 +160,9 @@ public class UserEntity{
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", favorites='" + getFavorites() + "'" +
-            ", clicks='" + getClicks() + "'" +
-            ", firebase='" + getFirebase() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", email='" + getEmail() + "'"
+                + ", password='" + getPassword() + "'" + ", favorites='" + getFavorites() + "'" + ", clicks='"
+                + getClicks() + "'" + ", firebase='" + getFirebase() + "'" + "}";
     }
 
 }

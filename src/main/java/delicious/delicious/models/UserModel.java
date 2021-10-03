@@ -7,22 +7,21 @@ import delicious.delicious.entities.RecipeEntity;
 
 public class UserModel {
     private Integer id;
-    private String name ;
+    private String name;
     private String email;
-    private String password ;
-    // private List  <RecipeEntity>recipe_favoriteModel;
-  // private List  <RecipeEntity>recipes_clicksModel;
-
+    private String password;
+    private List<RecipeEntity> recipe_favoriteModel;
+    // private List<RecipeEntity> recipes_clicksModel;
 
     public UserModel() {
     }
 
-    public UserModel(Integer id, String name, String email, String passwordl) {
+    public UserModel(Integer id, String name, String email, String password, List<RecipeEntity> recipe_favoriteModel) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-      
+        this.recipe_favoriteModel = recipe_favoriteModel;
     }
 
     public Integer getId() {
@@ -57,18 +56,13 @@ public class UserModel {
         this.password = password;
     }
 
-    // public List<RecipeEntity> getRecipe_favoriteModel() {
-    //     return this.recipe_favoriteModel;
-    // }
+    public List<RecipeEntity> getRecipe_favoriteModel() {
+        return this.recipe_favoriteModel;
+    }
 
-    // public void setRecipe_favoriteModel(List<RecipeEntity> recipe_favoriteModel) {
-    //     this.recipe_favoriteModel = recipe_favoriteModel;
-    // }
-
-   
-    
-
-   
+    public void setRecipe_favoriteModel(List<RecipeEntity> recipe_favoriteModel) {
+        this.recipe_favoriteModel = recipe_favoriteModel;
+    }
 
     public UserModel id(Integer id) {
         setId(id);
@@ -90,38 +84,34 @@ public class UserModel {
         return this;
     }
 
-    // public UserModel recipe_favoriteModel(List<RecipeEntity> recipe_favoriteModel) {
-    //     setRecipe_favoriteModel(recipe_favoriteModel);
-    //     return this;
-    // }
+    public UserModel recipe_favoriteModel(List<RecipeEntity> recipe_favoriteModel) {
+        setRecipe_favoriteModel(recipe_favoriteModel);
+        return this;
+    }
 
-  
-    // @Override
-    // public boolean equals(Object o) {
-    //     if (o == this)
-    //         return true;
-    //     if (!(o instanceof UserModel)) {
-    //         return false;
-    //     }
-    //     UserModel userModel = (UserModel) o;
-    //     return Objects.equals(id, userModel.id) && Objects.equals(name, userModel.name) && Objects.equals(email, userModel.email) && Objects.equals(password, userModel.password) && Objects.equals(recipe_favoriteModel, userModel.recipe_favoriteModel) );
-    // }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof UserModel)) {
+            return false;
+        }
+        UserModel userModel = (UserModel) o;
+        return Objects.equals(id, userModel.id) && Objects.equals(name, userModel.name)
+                && Objects.equals(email, userModel.email) && Objects.equals(password, userModel.password)
+                && Objects.equals(recipe_favoriteModel, userModel.recipe_favoriteModel);
+    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password);
+        return Objects.hash(id, name, email, password, recipe_favoriteModel);
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", password='" + getPassword() + "'" +
-            
-            
-            "}";
+        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", email='" + getEmail() + "'"
+                + ", password='" + getPassword() + "'" + ", recipe_favoriteModel='" + getRecipe_favoriteModel() + "'"
+                + "}";
     }
 
 }

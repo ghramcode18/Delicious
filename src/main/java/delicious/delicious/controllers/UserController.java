@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import delicious.delicious.entities.RecipeEntity;
 import delicious.delicious.exceptions.UserException;
+import delicious.delicious.models.RecipeFavModel;
 import delicious.delicious.models.RecipeModel;
 import delicious.delicious.models.UserModel;
 import delicious.delicious.services.RecipeService;
@@ -35,7 +37,7 @@ public class UserController {
          }
      }
      
-    @RequestMapping(value="/signIn", method=RequestMethod.POST)
+    @RequestMapping(value="/signIn", method=RequestMethod.GET)
     public Object signIn(@RequestBody UserModel user) {
         try{
             return userService.signIn(user);
@@ -57,14 +59,14 @@ public class UserController {
     }
 
     }
-   @RequestMapping(value ="/getFavorites/{num}",method = RequestMethod.GET)
-   public List<RecipeModel> getFavorite(@PathVariable (name = "num")Integer id)
-   {
-    return  userService.getFavorite(id);
-   }
+//    @RequestMapping(value ="/getFavorites/{num}",method = RequestMethod.GET)
+//    public List<RecipeEntity> getFavorite(@PathVariable (name = "num")Integer id)
+//    {
+//     return  userService.getFavoriteForUser(id);
+//    }
  
    @RequestMapping(value ="/addFavorite/{num}",method = RequestMethod.POST)
-   public UserModel addFavorite(@PathVariable (name = "num")Integer id,RecipeModel rModel)
+   public UserModel addFavorite(@PathVariable (name = "num")Integer id,@RequestBody RecipeModel rModel)
    {
     return userService.addFavorite(id, rModel);
    }
