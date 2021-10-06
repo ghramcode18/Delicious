@@ -1,5 +1,6 @@
 package delicious.delicious.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +27,7 @@ public class UserEntity {
     private String password;
 
     @ManyToMany(mappedBy = "users_added_to_favorite")
-    private List<RecipeEntity> favorites;
+    private List<RecipeEntity> favorites=new ArrayList<>();
 
     @ManyToMany(mappedBy = "users_clicked_recipe")
     private List<RecipeEntity> clicks;

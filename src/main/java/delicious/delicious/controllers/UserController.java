@@ -59,11 +59,11 @@ public class UserController {
     }
 
     }
-//    @RequestMapping(value ="/getFavorites/{num}",method = RequestMethod.GET)
-//    public List<RecipeEntity> getFavorite(@PathVariable (name = "num")Integer id)
-//    {
-//     return  userService.getFavoriteForUser(id);
-//    }
+   @RequestMapping(value ="/getFavorites/{num}",method = RequestMethod.GET)
+   public List<RecipeModel> getFavorite(@PathVariable (name = "num")Integer id)
+   {
+    return  userService.getFavorite(id);
+   }
  
    @RequestMapping(value ="/addFavorite/{num}",method = RequestMethod.POST)
    public UserModel addFavorite(@PathVariable (name = "num")Integer id,@RequestBody RecipeModel rModel)

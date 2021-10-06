@@ -82,15 +82,34 @@ public class UserService {
     public UserModel addFavorite(Integer id, RecipeModel rModel) {
 
         UserEntity entity = userRepo.findById(id).orElseThrow(() -> new UserException("no user with this id"));
-        if (entity.getFavorites().add(RecipeModelToRecipeEntity(rModel))) {
-            userRepo.save(entity);
-        } else {
-            throw new UserException("cant add to fav recipe");
-        }
+        entity.getFavorites().add(RecipeModelToRecipeEntity(rModel));
+        userRepo.save(entity);
 
         return UserEntityToUserModelwithfav(entity);
 
     }
+
+    /*
+    public List<UserResponse> search(String value)
+    {
+        List<UserResponse> responses = new ArrayList<UserResponse>();
+        userRepo.findByEmailLikeOrNameLike(value, value).stream().forEach((e)->{
+            UserResponse userResponse = new UserResponse()
+                .withId(e.getId())
+                .withName(e.getName())
+                .withImg(e.getImg());
+            responses.add(userResponse);
+        });
+        return responses;
+    }
+}*/
+    public List<RecipeModel> getFavorite(Integer id) {
+
+        UserEntity entity = userRepo.findById(id).orElseThrow(() -> new UserException("no user with this id"));
+        return RecipeEntityToRecipeModelAsList(entity.getFavorites());
+
+    }
+
 
     // public List getFavoriteForUser(Integer id) {
 
@@ -112,9 +131,12 @@ public class UserService {
     // return ;
     // }
 
+    private List<RecipeModel> RecipeEntityToRecipeModelAsList(List<RecipeEntity> favorites) {
+        return null;
+    }
+
     public UserModel UserEntityToUserModelwithfav(UserEntity user) {
-        UserModel model = new UserModel().email(user.getEmail()).name(user.getName()).id(user.getId())
-                .password(user.getPassword()).recipe_favoriteModel(user.getFavorites());
+        UserModel model = new UserModel().id(user.getId()).recipe_favoriteModel(user.getFavorites());
 
         return model;
 
