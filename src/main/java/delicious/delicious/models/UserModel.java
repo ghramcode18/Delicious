@@ -7,7 +7,7 @@ import delicious.delicious.entities.RecipeEntity;
 
 public class UserModel {
     private Integer id;
-    private String name;
+    private String userName;
     private String email;
     private String password;
     private List<RecipeEntity> recipe_favoriteModel;
@@ -16,9 +16,9 @@ public class UserModel {
     public UserModel() {
     }
 
-    public UserModel(Integer id, String name, String email, String password, List<RecipeEntity> recipe_favoriteModel) {
+    public UserModel(Integer id, String userName, String email, String password, List<RecipeEntity> recipe_favoriteModel) {
         this.id = id;
-        this.name = name;
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.recipe_favoriteModel = recipe_favoriteModel;
@@ -32,12 +32,12 @@ public class UserModel {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getuserName() {
+        return this.userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setuserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -69,8 +69,8 @@ public class UserModel {
         return this;
     }
 
-    public UserModel name(String name) {
-        setName(name);
+    public UserModel userName(String userName) {
+        setuserName(userName);
         return this;
     }
 
@@ -97,19 +97,19 @@ public class UserModel {
             return false;
         }
         UserModel userModel = (UserModel) o;
-        return Objects.equals(id, userModel.id) && Objects.equals(name, userModel.name)
+        return Objects.equals(id, userModel.id) && Objects.equals(userName, userModel.userName)
                 && Objects.equals(email, userModel.email) && Objects.equals(password, userModel.password)
                 && Objects.equals(recipe_favoriteModel, userModel.recipe_favoriteModel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, recipe_favoriteModel);
+        return Objects.hash(id, userName, email, password, recipe_favoriteModel);
     }
 
     @Override
     public String toString() {
-        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", email='" + getEmail() + "'"
+        return "{" + " id='" + getId() + "'" + ", userName='" + getuserName() + "'" + ", email='" + getEmail() + "'"
                 + ", password='" + getPassword() + "'" + ", recipe_favoriteModel='" + getRecipe_favoriteModel() + "'"
                 + "}";
     }

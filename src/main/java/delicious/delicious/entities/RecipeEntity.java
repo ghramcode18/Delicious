@@ -1,5 +1,6 @@
 package delicious.delicious.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -54,7 +55,7 @@ public class RecipeEntity {
     name = "users_clicks", 
     joinColumns = @JoinColumn(name = "recipe_id"), 
     inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List <UserEntity>user_clicks;
+    private List <UserEntity>user_clicks=new ArrayList<>();
 
      @OneToOne
      private Recipe_stepsEntity users_clicked_recipe;

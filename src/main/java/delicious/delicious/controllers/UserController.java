@@ -64,12 +64,30 @@ public class UserController {
    {
     return  userService.getFavorite(id);
    }
- 
-   @RequestMapping(value ="/addFavorite/{num}",method = RequestMethod.POST)
-   public UserModel addFavorite(@PathVariable (name = "num")Integer id,@RequestBody RecipeModel rModel)
-   {
-    return userService.addFavorite(id, rModel);
-   }
+//    @RequestMapping(value ="/addFavorite/{userId}/{recipeId}",method =
+//    RequestMethod.POST)
+//    public void addFavorite(
+//    @PathVariable (name = "userId")Integer userId,
+//    @PathVariable (name = "recipeId") Integer recipeId )
+//    {
+//    userService.addFavorite(userId, recipeId);
+//    }
+
+@RequestMapping(value ="/addFavorite/{userId}",method =
+
+RequestMethod.POST)
+public void addFavorite(
+@PathVariable (name = "userId")Integer userId,
+@RequestBody RecipeModel recipeId)
+// @PathVariable (name = "recipeId") Integer recipeId )
+{
+userService.addFavorite(userId, recipeId);
+}
+//    @RequestMapping(value ="/addFavorite/{num}",method = RequestMethod.POST)
+//    public UserModel addFavorite(@PathVariable (name = "num")Integer id,@RequestBody RecipeModel rModel)
+//    {
+//     return userService.addFavorite(id, rModel);
+//    }
  
 
 }

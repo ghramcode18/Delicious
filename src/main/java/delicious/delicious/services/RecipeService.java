@@ -41,7 +41,8 @@ public class RecipeService {
        .price(recipeEntity.getPrice())
        .type(recipeEntity.getType())
        .recipe_steps(recipeEntity.getSteps())
-       .user_favorite(recipeEntity.getUsers_added_to_favorite());
+       .steps(recipeEntity.getSteps());
+
        recipeModels.add(rModel);
 
        }
