@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,8 +13,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name  = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class UserEntity {
 
     @Id
@@ -26,26 +32,26 @@ public class UserEntity {
 
     private String password;
 
-    @ManyToMany(mappedBy = "users_added_to_favorite")
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "users_added_to_favorite")
     private List<RecipeEntity> favorites;
 
     @ManyToMany(mappedBy = "users_clicked_recipe")
-    private List<RecipeEntity> clicksnew = new ArrayList<>();
+    private List<RecipeEntity> clicks= new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<FireBaseEntity> firebasenew= new  ArrayList<>();
+    private List<FireBaseEntity> firebase= new  ArrayList<>();
 
     public UserEntity() {
     }
 
-    public UserEntity(Integer id, String userName, String email, String password, List<RecipeEntity> favorites, List<RecipeEntity> clicksnew, List<FireBaseEntity> firebasenew) {
+    public UserEntity(Integer id, String userName, String email, String password, List<RecipeEntity> favorites, List<RecipeEntity> clicks, List<FireBaseEntity> firebase) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.favorites = favorites;
-        this.clicksnew = clicksnew;
-        this.firebasenew = firebasenew;
+        this.clicks = clicks;
+        this.firebase = firebase;
     }
 
     public Integer getId() {
@@ -88,20 +94,20 @@ public class UserEntity {
         this.favorites = favorites;
     }
 
-    public List<RecipeEntity> getClicksnew() {
-        return this.clicksnew;
+    public List<RecipeEntity> getClicks() {
+        return this.clicks;
     }
 
-    public void setClicksnew(List<RecipeEntity> clicksnew) {
-        this.clicksnew = clicksnew;
+    public void setClicks(List<RecipeEntity> clicks) {
+        this.clicks = clicks;
     }
 
-    public List<FireBaseEntity> getFirebasenew() {
-        return this.firebasenew;
+    public List<FireBaseEntity> getFirebase() {
+        return this.firebase;
     }
 
-    public void setFirebasenew(List<FireBaseEntity> firebasenew) {
-        this.firebasenew = firebasenew;
+    public void setFirebase(List<FireBaseEntity> firebase) {
+        this.firebase = firebase;
     }
 
     public UserEntity id(Integer id) {
@@ -129,13 +135,13 @@ public class UserEntity {
         return this;
     }
 
-    public UserEntity clicksnew(List<RecipeEntity> clicksnew) {
-        setClicksnew(clicksnew);
+    public UserEntity clicks(List<RecipeEntity> clicks) {
+        setClicks(clicks);
         return this;
     }
 
-    public UserEntity firebasenew(List<FireBaseEntity> firebasenew) {
-        setFirebasenew(firebasenew);
+    public UserEntity firebase(List<FireBaseEntity> firebase) {
+        setFirebase(firebase);
         return this;
     }
 
@@ -147,12 +153,12 @@ public class UserEntity {
             return false;
         }
         UserEntity userEntity = (UserEntity) o;
-        return Objects.equals(id, userEntity.id) && Objects.equals(userName, userEntity.userName) && Objects.equals(email, userEntity.email) && Objects.equals(password, userEntity.password) && Objects.equals(favorites, userEntity.favorites) && Objects.equals(clicksnew, userEntity.clicksnew) && Objects.equals(firebasenew, userEntity.firebasenew);
+        return Objects.equals(id, userEntity.id) && Objects.equals(userName, userEntity.userName) && Objects.equals(email, userEntity.email) && Objects.equals(password, userEntity.password) && Objects.equals(favorites, userEntity.favorites) && Objects.equals(clicks, userEntity.clicks) && Objects.equals(firebase, userEntity.firebase);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, email, password, favorites, clicksnew, firebasenew);
+        return Objects.hash(id, userName, email, password, favorites, clicks, firebase);
     }
 
     @Override
@@ -163,8 +169,8 @@ public class UserEntity {
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", favorites='" + getFavorites() + "'" +
-            ", clicksnew='" + getClicksnew() + "'" +
-            ", firebasenew='" + getFirebasenew() + "'" +
+            ", clicks='" + getClicks() + "'" +
+            ", firebase='" + getFirebase() + "'" +
             "}";
     }
 

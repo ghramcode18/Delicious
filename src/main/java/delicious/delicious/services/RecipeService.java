@@ -54,13 +54,6 @@ public class RecipeService {
    
 
 
-//    private RecipeEntity RecipeModelToRecipeEntity(RecipeModel rModel) {
-//            return null;
-//            //TODO PLEASE
-//        }
-//        private RecipeModel RecipeEntityToRecepeModel(Optional<RecipeEntity> findBytype) {
-//         return null;
-//     }
     private Recipe_stepsEntity getrecipe_steps(Recipe_stepsEntity recipe_steps) {
      Optional<Recipe_stepsEntity> recipe_stepsEntity= recipe_StepsRepo.findById(recipe_steps.getId());
      Recipe_StepsModel rModel =new Recipe_StepsModel();

@@ -1,10 +1,8 @@
 package delicious.delicious.models;
 
-import java.util.List;
 import java.util.Objects;
 
 import delicious.delicious.entities.Recipe_stepsEntity;
-import delicious.delicious.entities.UserEntity;
 
 public class RecipeFavModel {
     private Integer id;

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,9 +16,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import org.hibernate.annotations.CascadeType;
+
 
 @Entity
 @Table(name = "recipe")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class RecipeEntity {
     
     @Id
@@ -39,11 +47,11 @@ public class RecipeEntity {
     @OneToOne
     private Recipe_stepsEntity steps ;
 
-    // @Column(columnDefinition="TEXT")
     @Column(columnDefinition = "TEXT", length = 4000)
     private String imgrate;
 
-    @ManyToMany(targetEntity = UserEntity.class)
+    
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
     @JoinTable(
     name = "user_favorites", 
     joinColumns = @JoinColumn(name = "recipe_id"), 
