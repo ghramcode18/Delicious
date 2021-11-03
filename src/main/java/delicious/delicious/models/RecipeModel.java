@@ -1,5 +1,6 @@
 package delicious.delicious.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,11 +13,10 @@ public class RecipeModel {
     private String image ;
     private double price ;
     private String type ;
-    private Recipe_stepsEntity steps ;
-    
     private String imgrate;
-    private List <UserEntity>user_favorite;
-    private List <UserEntity>user_clike;
+    private Recipe_stepsEntity steps ;
+    private List <UserEntity>user_favorite=new ArrayList<>();
+    private List <UserEntity>user_clike=new ArrayList<>();
     private Recipe_stepsEntity recipe_steps;
 
     public RecipeModel() {

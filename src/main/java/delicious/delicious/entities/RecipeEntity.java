@@ -1,25 +1,35 @@
 package delicious.delicious.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import org.hibernate.annotations.CascadeType;
+
 
 @Entity
-@Table(name = "Recipe")
+@Table(name = "recipe")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class RecipeEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(nullable = true)
@@ -37,24 +47,32 @@ public class RecipeEntity {
     @OneToOne
     private Recipe_stepsEntity steps ;
 
-    @Column(nullable = true)
+    @Column(columnDefinition = "TEXT", length = 4000)
     private String imgrate;
 
-    @ManyToMany(targetEntity = UserEntity.class)
     
-    private List <UserEntity>user_favorite;
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+    @JoinTable(
+    name = "user_favorites", 
+    joinColumns = @JoinColumn(name = "recipe_id"), 
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List <UserEntity>users_added_to_favorite;
    
-    // @ManyToMany( mappedBy = "recipes_clicks")
-    // private List <UserEntity>user_clicks;
+    @ManyToMany(targetEntity = UserEntity.class)
+    @JoinTable(
+    name = "users_clicks", 
+    joinColumns = @JoinColumn(name = "recipe_id"), 
+    inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List <UserEntity>user_clicks=new ArrayList<>();
 
-  //  (mappedBy = "id_recipeSteps_id")
      @OneToOne
-     private Recipe_stepsEntity recipe_steps;
+     private Recipe_stepsEntity users_clicked_recipe;
+
 
     public RecipeEntity() {
     }
 
-    public RecipeEntity(Integer id, String name, String image, double price, String type, Recipe_stepsEntity steps, String imgrate, List<UserEntity> user_favorite, Recipe_stepsEntity recipe_steps) {
+    public RecipeEntity(Integer id, String name, String image, Integer price, String type, Recipe_stepsEntity steps, String imgrate, List<UserEntity> users_added_to_favorite, List<UserEntity> user_clicks, Recipe_stepsEntity users_clicked_recipe) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -62,8 +80,9 @@ public class RecipeEntity {
         this.type = type;
         this.steps = steps;
         this.imgrate = imgrate;
-        this.user_favorite = user_favorite;
-        this.recipe_steps = recipe_steps;
+        this.users_added_to_favorite = users_added_to_favorite;
+        this.user_clicks = user_clicks;
+        this.users_clicked_recipe = users_clicked_recipe;
     }
 
     public Integer getId() {
@@ -94,8 +113,8 @@ public class RecipeEntity {
         return this.price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(double d) {
+        this.price = d;
     }
 
     public String getType() {
@@ -122,20 +141,28 @@ public class RecipeEntity {
         this.imgrate = imgrate;
     }
 
-    public List<UserEntity> getUser_favorite() {
-        return this.user_favorite;
+    public List<UserEntity> getUsers_added_to_favorite() {
+        return this.users_added_to_favorite;
     }
 
-    public void setUser_favorite(List<UserEntity> user_favorite) {
-        this.user_favorite = user_favorite;
+    public void setUsers_added_to_favorite(List<UserEntity> users_added_to_favorite) {
+        this.users_added_to_favorite = users_added_to_favorite;
     }
 
-    public Recipe_stepsEntity getRecipe_steps() {
-        return this.recipe_steps;
+    public List<UserEntity> getUser_clicks() {
+        return this.user_clicks;
     }
 
-    public void setRecipe_steps(Recipe_stepsEntity recipe_steps) {
-        this.recipe_steps = recipe_steps;
+    public void setUser_clicks(List<UserEntity> user_clicks) {
+        this.user_clicks = user_clicks;
+    }
+
+    public Recipe_stepsEntity getUsers_clicked_recipe() {
+        return this.users_clicked_recipe;
+    }
+
+    public void setUsers_clicked_recipe(Recipe_stepsEntity users_clicked_recipe) {
+        this.users_clicked_recipe = users_clicked_recipe;
     }
 
     public RecipeEntity id(Integer id) {
@@ -153,8 +180,8 @@ public class RecipeEntity {
         return this;
     }
 
-    public RecipeEntity price(double price) {
-        setPrice(price);
+    public RecipeEntity price(double d) {
+        setPrice(d);
         return this;
     }
 
@@ -173,13 +200,18 @@ public class RecipeEntity {
         return this;
     }
 
-    public RecipeEntity user_favorite(List<UserEntity> user_favorite) {
-        setUser_favorite(user_favorite);
+    public RecipeEntity users_added_to_favorite(List<UserEntity> users_added_to_favorite) {
+        setUsers_added_to_favorite(users_added_to_favorite);
         return this;
     }
 
-    public RecipeEntity recipe_steps(Recipe_stepsEntity recipe_steps) {
-        setRecipe_steps(recipe_steps);
+    public RecipeEntity user_clicks(List<UserEntity> user_clicks) {
+        setUser_clicks(user_clicks);
+        return this;
+    }
+
+    public RecipeEntity users_clicked_recipe(Recipe_stepsEntity users_clicked_recipe) {
+        setUsers_clicked_recipe(users_clicked_recipe);
         return this;
     }
 
@@ -191,12 +223,12 @@ public class RecipeEntity {
             return false;
         }
         RecipeEntity recipeEntity = (RecipeEntity) o;
-        return Objects.equals(id, recipeEntity.id) && Objects.equals(name, recipeEntity.name) && Objects.equals(image, recipeEntity.image) && price == recipeEntity.price && Objects.equals(type, recipeEntity.type) && Objects.equals(steps, recipeEntity.steps) && Objects.equals(imgrate, recipeEntity.imgrate) && Objects.equals(user_favorite, recipeEntity.user_favorite) && Objects.equals(recipe_steps, recipeEntity.recipe_steps);
+        return Objects.equals(id, recipeEntity.id) && Objects.equals(name, recipeEntity.name) && Objects.equals(image, recipeEntity.image) && price == recipeEntity.price && Objects.equals(type, recipeEntity.type) && Objects.equals(steps, recipeEntity.steps) && Objects.equals(imgrate, recipeEntity.imgrate) && Objects.equals(users_added_to_favorite, recipeEntity.users_added_to_favorite) && Objects.equals(user_clicks, recipeEntity.user_clicks) && Objects.equals(users_clicked_recipe, recipeEntity.users_clicked_recipe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, image, price, type, steps, imgrate, user_favorite, recipe_steps);
+        return Objects.hash(id, name, image, price, type, steps, imgrate, users_added_to_favorite, user_clicks, users_clicked_recipe);
     }
 
     @Override
@@ -209,11 +241,11 @@ public class RecipeEntity {
             ", type='" + getType() + "'" +
             ", steps='" + getSteps() + "'" +
             ", imgrate='" + getImgrate() + "'" +
-            ", user_favorite='" + getUser_favorite() + "'" +
-            ", recipe_steps='" + getRecipe_steps() + "'" +
+            ", users_added_to_favorite='" + getUsers_added_to_favorite() + "'" +
+            ", user_clicks='" + getUser_clicks() + "'" +
+            ", users_clicked_recipe='" + getUsers_clicked_recipe() + "'" +
             "}";
     }
-
 
 
 }

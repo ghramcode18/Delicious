@@ -12,79 +12,78 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "Recipe_steps")
+@Table(name = "recipe_steps")
 public class Recipe_stepsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer Id;
 
     @Column(nullable = true)
-    private Integer step_number;
-    @Column(nullable = true)
-    private String descripion;
-    //(mappedBy = "idRecipe_step")
-   @OneToOne
-    private RecipeEntity recipeEntity;
+    private Integer step_Number;
+    @Column(columnDefinition = "TEXT", length = 43333000)
+    private String Descripion;
+    @OneToOne
+    private RecipeEntity recipe;
 
     public Recipe_stepsEntity() {
     }
 
-    public Recipe_stepsEntity(Integer id, Integer step_number, String descripion, RecipeEntity recipeEntity) {
-        this.id = id;
-        this.step_number = step_number;
-        this.descripion = descripion;
-        this.recipeEntity = recipeEntity;
+    public Recipe_stepsEntity(Integer Id, Integer step_Number, String Descripion, RecipeEntity recipe) {
+        this.Id = Id;
+        this.step_Number = step_Number;
+        this.Descripion = Descripion;
+        this.recipe = recipe;
     }
 
     public Integer getId() {
-        return this.id;
+        return this.Id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer Id) {
+        this.Id = Id;
     }
 
-    public Integer getStep_number() {
-        return this.step_number;
+    public Integer getStep_Number() {
+        return this.step_Number;
     }
 
-    public void setStep_number(Integer step_number) {
-        this.step_number = step_number;
+    public void setStep_Number(Integer step_Number) {
+        this.step_Number = step_Number;
     }
 
     public String getDescripion() {
-        return this.descripion;
+        return this.Descripion;
     }
 
-    public void setDescripion(String descripion) {
-        this.descripion = descripion;
+    public void setDescripion(String Descripion) {
+        this.Descripion = Descripion;
     }
 
-    public RecipeEntity getRecipeEntity() {
-        return this.recipeEntity;
+    public RecipeEntity getRecipe() {
+        return this.recipe;
     }
 
-    public void setRecipeEntity(RecipeEntity recipeEntity) {
-        this.recipeEntity = recipeEntity;
+    public void setRecipe(RecipeEntity recipe) {
+        this.recipe = recipe;
     }
 
-    public Recipe_stepsEntity id(Integer id) {
-        setId(id);
+    public Recipe_stepsEntity Id(Integer Id) {
+        setId(Id);
         return this;
     }
 
-    public Recipe_stepsEntity step_number(Integer step_number) {
-        setStep_number(step_number);
+    public Recipe_stepsEntity step_Number(Integer step_Number) {
+        setStep_Number(step_Number);
         return this;
     }
 
-    public Recipe_stepsEntity descripion(String descripion) {
-        setDescripion(descripion);
+    public Recipe_stepsEntity Descripion(String Descripion) {
+        setDescripion(Descripion);
         return this;
     }
 
-    public Recipe_stepsEntity recipeEntity(RecipeEntity recipeEntity) {
-        setRecipeEntity(recipeEntity);
+    public Recipe_stepsEntity recipe(RecipeEntity recipe) {
+        setRecipe(recipe);
         return this;
     }
 
@@ -95,23 +94,23 @@ public class Recipe_stepsEntity {
         if (!(o instanceof Recipe_stepsEntity)) {
             return false;
         }
-        Recipe_stepsEntity recipe_steps = (Recipe_stepsEntity) o;
-        return Objects.equals(id, recipe_steps.id) && Objects.equals(step_number, recipe_steps.step_number) && Objects.equals(descripion, recipe_steps.descripion) && Objects.equals(recipeEntity, recipe_steps.recipeEntity);
+        Recipe_stepsEntity recipe_stepsEntity = (Recipe_stepsEntity) o;
+        return Objects.equals(Id, recipe_stepsEntity.Id) && Objects.equals(step_Number, recipe_stepsEntity.step_Number) && Objects.equals(Descripion, recipe_stepsEntity.Descripion) && Objects.equals(recipe, recipe_stepsEntity.recipe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, step_number, descripion, recipeEntity);
+        return Objects.hash(Id, step_Number, Descripion, recipe);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", step_number='" + getStep_number() + "'" +
-            ", descripion='" + getDescripion() + "'" +
-            ", recipeEntity='" + getRecipeEntity() + "'" +
+            " Id='" + getId() + "'" +
+            ", step_Number='" + getStep_Number() + "'" +
+            ", Descripion='" + getDescripion() + "'" +
+            ", recipe='" + getRecipe() + "'" +
             "}";
     }
-  
+
 }
