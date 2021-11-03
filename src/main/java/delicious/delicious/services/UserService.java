@@ -84,7 +84,9 @@ public class UserService {
 
         RecipeEntity recipeEntity = recipeRepo.findById(recipe.getId())
                 .orElseThrow(() -> new RecipeException("no recipe with this id"));
-        List<UserEntity> userEntities = new ArrayList<>();
+        List<UserEntity> userEntities = recipeEntity.getUsers_added_to_favorite();
+        int i = userEntities.stream().filter((user)->user.getId().equals(userId)).toList().size();
+        if(i == 0)
         userEntities.add(userEntity);
         recipeEntity.setUsers_added_to_favorite(userEntities);
         recipeRepo.save(recipeEntity);
