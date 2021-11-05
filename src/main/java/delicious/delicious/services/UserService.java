@@ -84,33 +84,16 @@ public class UserService {
 
         RecipeEntity recipeEntity = recipeRepo.findById(recipe.getId())
                 .orElseThrow(() -> new RecipeException("no recipe with this id"));
-        List<UserEntity> userEntities = new ArrayList<>();
+        List<UserEntity> userEntities = recipeEntity.getUsers_added_to_favorite();
+        int i = userEntities.stream().filter((user)->user.getId().equals(userId)).toList().size();
+        if(i == 0)
         userEntities.add(userEntity);
         recipeEntity.setUsers_added_to_favorite(userEntities);
         recipeRepo.save(recipeEntity);
        
     }
 
-    // public UserModel addFavorite (Integer id , RecipeModel rModel)
-    // {List<RecipeEntity>recipeEntities= new ArrayList();
-    // userRepo.findById(id).stream().forEach((e)->{
-    // // List <UserFavModel> userFavModels= new
-    // UserFavModel().recipe_favoriteModel(rModel.getUser_favorite());
-    // // RecipeEntity recipeEntity= new RecipeEntity().users_added_to_favorite();
-    // // recipeEntities.add(recipeEntity);
 
-    // });
-
-    // }
-
-    /*
-     * 
-     * public List<UserResponse> search(String value) { List<UserResponse> responses
-     * = new ArrayList<UserResponse>(); userRepo.findByEmailLikeOrNameLike(value,
-     * value).stream().forEach((e)->{ UserResponse userResponse = new UserResponse()
-     * .withId(e.getId()) .withName(e.getName()) .withImg(e.getImg());
-     * responses.add(userResponse); }); return responses; } }
-     */
     public List<RecipeModel> getFavorite(Integer id) {
 
         UserEntity entity = userRepo.findById(id).orElseThrow(() -> new UserException("no user with this id"));
