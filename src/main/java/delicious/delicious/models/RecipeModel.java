@@ -14,7 +14,7 @@ public class RecipeModel {
     private double price ;
     private String type ;
     private String imgrate;
-    private Recipe_stepsEntity steps ;
+    // private Recipe_stepsEntity steps ;
     private List <UserEntity>user_favorite=new ArrayList<>();
     private List <UserEntity>user_clike=new ArrayList<>();
     private Recipe_stepsEntity recipe_steps;
@@ -28,7 +28,7 @@ public class RecipeModel {
         this.image = image;
         this.price = price;
         this.type = type;
-        this.steps = steps;
+      //  this.steps = steps;
         this.imgrate = imgrate;
         this.user_favorite = user_favorite;
         this.user_clike = user_clike;
@@ -75,13 +75,13 @@ public class RecipeModel {
         this.type = type;
     }
 
-    public Recipe_stepsEntity getSteps() {
-        return this.steps;
-    }
+    // public Recipe_stepsEntity getSteps() {
+    //     return this.steps;
+    // }
 
-    public void setSteps(Recipe_stepsEntity steps) {
-        this.steps = steps;
-    }
+    // public void setSteps(Recipe_stepsEntity steps) {
+    //     this.steps = steps;
+    // }
 
     public String getImgrate() {
         return this.imgrate;
@@ -140,10 +140,10 @@ public class RecipeModel {
         return this;
     }
 
-    public RecipeModel steps(Recipe_stepsEntity steps) {
-        setSteps(steps);
-        return this;
-    }
+    // public RecipeModel steps(Recipe_stepsEntity steps) {
+    //     setSteps(steps);
+    //     return this;
+    // }
 
     public RecipeModel imgrate(String imgrate) {
         setImgrate(imgrate);
@@ -173,12 +173,12 @@ public class RecipeModel {
             return false;
         }
         RecipeModel recipeModel = (RecipeModel) o;
-        return Objects.equals(id, recipeModel.id) && Objects.equals(name, recipeModel.name) && Objects.equals(image, recipeModel.image) && price == recipeModel.price && Objects.equals(type, recipeModel.type) && Objects.equals(steps, recipeModel.steps) && Objects.equals(imgrate, recipeModel.imgrate) && Objects.equals(user_favorite, recipeModel.user_favorite) && Objects.equals(user_clike, recipeModel.user_clike) && Objects.equals(recipe_steps, recipeModel.recipe_steps);
+        return Objects.equals(id, recipeModel.id) && Objects.equals(name, recipeModel.name) && Objects.equals(image, recipeModel.image) && price == recipeModel.price && Objects.equals(type, recipeModel.type) &&  Objects.equals(imgrate, recipeModel.imgrate) && Objects.equals(user_favorite, recipeModel.user_favorite) && Objects.equals(user_clike, recipeModel.user_clike) && Objects.equals(recipe_steps, recipeModel.recipe_steps);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, image, price, type, steps, imgrate, user_favorite, user_clike, recipe_steps);
+        return Objects.hash(id, name, image, price, type, imgrate, user_favorite, user_clike, recipe_steps);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class RecipeModel {
             ", image='" + getImage() + "'" +
             ", price='" + getPrice() + "'" +
             ", type='" + getType() + "'" +
-            ", steps='" + getSteps() + "'" +
+           // ", steps='" + getSteps() + "'" +
             ", imgrate='" + getImgrate() + "'" +
             ", user_favorite='" + getUser_favorite() + "'" +
             ", user_clike='" + getUser_clike() + "'" +

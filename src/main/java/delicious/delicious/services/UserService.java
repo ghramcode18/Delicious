@@ -123,7 +123,7 @@ public class UserService {
         RecipeModel recipe_steps = new RecipeModel();
         recipe_steps.id(recipeEntity.getId()).name(recipeEntity.getName()).id(recipeEntity.getId())
                 .image(recipeEntity.getImage()).imgrate(recipeEntity.getImgrate()).price(recipeEntity.getPrice())
-                .steps(recipeEntity.getSteps()).type(recipeEntity.getType()).recipe_steps(recipeEntity.getSteps());
+               . type(recipeEntity.getType()).recipe_steps(recipeEntity.getSteps());
 
         return recipe_steps;
     }
