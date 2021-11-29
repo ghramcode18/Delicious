@@ -40,8 +40,8 @@ public class RecipeService {
        .imgrate(recipeEntity.getImgrate())
        .price(recipeEntity.getPrice())
        .type(recipeEntity.getType())
-       .recipe_steps(recipeEntity.getSteps())
-       .steps(recipeEntity.getSteps());
+       .recipe_steps(recipeEntity.getSteps());
+       
 
        recipeModels.add(rModel);
 
@@ -84,5 +84,7 @@ public class RecipeService {
     
     
     }
+
+  
 }
   
