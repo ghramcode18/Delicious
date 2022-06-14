@@ -14,12 +14,12 @@ import javax.persistence.Table;
 @Table(name="firebase")
 public class FireBaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
     @ManyToOne(optional=true,targetEntity = UserEntity.class)
     private UserEntity user;
-    
+
     @Column(nullable = false)
     private String token;
 
